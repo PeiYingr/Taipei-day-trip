@@ -83,90 +83,46 @@ def attractions():
 									"images" : image
 								}
 					attraction_list.append(response_json)
-		if keyword != None:
-			category_search="SELECT DISTINCT category FROM attractions"
-			cursor.execute(category_search)
-			result_category = cursor.fetchall()
-			catlist=[]
-			for x in result_category:
-				catlist.append(x[0])
-			if keyword in catlist:
-				attraction ="SELECT * FROM attractions WHERE category=%s limit %s, 13" 
-				cursor.execute(attraction,(keyword, page*12))
-				result=cursor.fetchall()
-				if len(result)>12:
-					nextpage=page+1
-					for x in result[0:12]:
-						image=x[9].split(",")
-						response_json={
-										"id" :x[0], 
-										"name" : x[1],
-										"category" :x[2],
-										"description" : x[3],
-										"address" : x[4],
-										"transport" : x[5],
-										"mrt" : x[6],
-										"lat" : x[7],
-										"lng" : x[8],
-										"images" : image
-									}
-						attraction_list.append(response_json)
-				else:
-					nextpage=None
-					for x in result:
-						image=x[9].split(",")
-						response_json={
-										"id" :x[0], 
-										"name" : x[1],
-										"category" :x[2],
-										"description" : x[3],
-										"address" : x[4],
-										"transport" : x[5],
-										"mrt" : x[6],
-										"lat" : x[7],
-										"lng" : x[8],
-										"images" : image
-									}
-						attraction_list.append(response_json)	
+		else:
+			attraction_search="SELECT * FROM attractions WHERE category=%s OR name LIKE %s LIMIT %s, 13"
+			value=(keyword, f"%{keyword}%", page*12)
+			# 也可使用 "%"+f"{keyword}"+"%"、"%"+keyword +"%" 
+			cursor.execute(attraction_search, value)
+			result = cursor.fetchall()
+			if len(result)>12:
+				nextpage=page+1
+				for x in result[0:12]:
+					image=x[9].split(",")
+					response_json={
+									"id" :x[0], 
+									"name" : x[1],
+									"category" :x[2],
+									"description" : x[3],
+									"address" : x[4],
+									"transport" : x[5],
+									"mrt" : x[6],
+									"lat" : x[7],
+									"lng" : x[8],
+									"images" : image
+								}
+					attraction_list.append(response_json)
 			else:
-				attraction = "SELECT * FROM attractions WHERE name LIKE %s limit %s, 13" 
-				cursor.execute(attraction,(f"%{keyword}%", page*12))
-				# 也可使用 cursor.execute(attraction,("%"+f"{keyword}"+"%", page*12))
-				result=cursor.fetchall()
-				if len(result)>12:
-					nextpage=page+1
-					for x in result[0:12]:
-						image=x[9].split(",")
-						response_json={
-										"id" :x[0], 
-										"name" : x[1],
-										"category" :x[2],
-										"description" : x[3],
-										"address" : x[4],
-										"transport" : x[5],
-										"mrt" : x[6],
-										"lat" : x[7],
-										"lng" : x[8],
-										"images" : image
-									}
-						attraction_list.append(response_json)
-				else:
-					nextpage=None
-					for x in result:
-						image=x[9].split(",")
-						response_json={
-										"id" :x[0], 
-										"name" : x[1],
-										"category" :x[2],
-										"description" : x[3],
-										"address" : x[4],
-										"transport" : x[5],
-										"mrt" : x[6],
-										"lat" : x[7],
-										"lng" : x[8],
-										"images" : image
-									}
-						attraction_list.append(response_json)				
+				nextpage=None
+				for x in result:
+					image=x[9].split(",")
+					response_json={
+									"id" :x[0], 
+									"name" : x[1],
+									"category" :x[2],
+									"description" : x[3],
+									"address" : x[4],
+									"transport" : x[5],
+									"mrt" : x[6],
+									"lat" : x[7],
+									"lng" : x[8],
+									"images" : image
+								}
+					attraction_list.append(response_json)				
 		all_data={
 			"nextPage":nextpage,
 			"data":attraction_list
