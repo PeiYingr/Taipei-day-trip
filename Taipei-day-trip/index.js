@@ -47,6 +47,7 @@ function attractionsLoad(attractions_img, attractions_name, attractions_mrt, att
 }
 // 全域變數(Part 2-3會需要使用到)
 let page=0
+let attractionSearch=""
 
 //Part 2-2：串接景點 API，取得並展⽰第⼀⾴的景點資訊
 fetch("/api/attractions").then(function(response){
@@ -71,7 +72,7 @@ fetch("/api/attractions").then(function(response){
 
 // Part 2-4：完成關鍵字搜尋功能
 function getData(){
-    let attractionSearch = document.getElementById("keyword").value;
+    attractionSearch = document.getElementById("keyword").value;
     page=0;
     fetch("api/attractions?page="+page+"&keyword="+attractionSearch).then(function(response){
         return response.json();
@@ -157,7 +158,7 @@ setTimeout(function(){
         if(entry[0].isIntersecting){
             // 如果沒有下一頁的話，就不會再去連線取資料
             if (page!==null){ 
-                fetch("/api/attractions?page="+page).then(function(response){
+                fetch("/api/attractions?page="+page+"&keyword="+attractionSearch).then(function(response){
                     return response.json(); 
                 }).then(function(data){
                     let attractions_data=data.data;                 
