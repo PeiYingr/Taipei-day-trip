@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+        <meta charset="utf-8"/>
+        <title>台北一日遊</title>
+        <link rel="stylesheet" type="text/css" href="TaipeiDayTrip.css">
+    </head>
+    <body>
+        <div class="frameColor">
+            <div class="frame">
+                <div class="title">台北一日遊</div>
+                <div class="reserve">預定行程</div>
+                <div class="sign">登入/註冊</div>
+            </div>
+        </div>
+        <div class="welcome">
+            <img src="welcome image.jpg" class="oneOone"/>
+            <div class="slogan">
+                <div class="sloganframe">
+                    <div class="slogantext">
+                        <div class="enjoy">輕鬆享受台北一日悠閒</div>
+                        <div class="explore">探索每個角落，體驗城市的深度旅遊行程</div>    
+                    </div>      
+                    <div class="search">
+                        <div class="searchbar" >
+                            <input type="text" name="name" id="keyword" placeholder="輸入景點名稱查詢" autocomplete="off" onclick="showCategory()" onblur="hideCategory()" />
+                            <div class="button"                   
+                            onclick="getData();"><img src="search.png" align="middle" />
+                            </div>
+                        </div>
+                    <div class="categorylist">
+                        <!-- <div class="categories"></div> -->
+                    </div>
+                    </div>
+                </div>
+            </div> 
+        </div>  
+        <div class="attractions_frame">
+            <div class="attractions">
+                <!-- <div class="pic">
+                        <img/>
+                        <div class="name_frame">
+                            <div class="name"></div>
+                        </div>
+                        <div class="information_frame">
+                            <div class="information">
+                                <div class="mrt"></div>
+                                <div class="category"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footerText">COPYRIGHT © 2021 台北一日遊</div>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
