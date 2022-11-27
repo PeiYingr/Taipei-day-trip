@@ -14,6 +14,7 @@ body{
     height:54px;
     margin:auto;
     background: #FFFFFF;
+    align-items: center;
 }
 .title{
     flex:none;
@@ -22,7 +23,6 @@ body{
     font-size:30px;
     font-weight:700;
     color: #448899;
-    align-items:center; 
     text-align:center;
     margin-top:10px;
     margin-bottom:10px;
@@ -32,7 +32,6 @@ body{
     flex:none;
     width:64px;
     height:16px;
-    align-items:center; 
     color: #666666;
     font-weight: 500;
     font-size: 16px;
@@ -43,8 +42,7 @@ body{
 .sign{
     flex:none;
     width: 71px;
-    height: 16px;
-    align-items:center; 
+    height: 16px; 
     color: #666666;
     font-weight: 500;
     font-size: 16px;
@@ -285,6 +283,9 @@ body{
     .title{
         margin-left:10px;
         margin-right:35px;
+    }
+    .reserve{
+        margin-left: auto;
     }
     .welcome{
         width: 100%;
