@@ -5,7 +5,7 @@ function attractionsLoad(attractions_img, attractions_name, attractions_mrt, att
             // 1-1.新增照片區塊
             let newpic=document.createElement("img");
             newpic.setAttribute("src",attractions_img);
-            picSquare.appendChild(newpic)
+            picSquare.appendChild(newpic);
     
             // 1-2.新增name_frame區塊
             let name_frame=document.createElement("div");
@@ -22,10 +22,10 @@ function attractionsLoad(attractions_img, attractions_name, attractions_mrt, att
             // 1-3.新增information_frame區塊
             let information_frame=document.createElement("div");
             information_frame.setAttribute("class","information_frame");
-            picSquare.appendChild(information_frame)
+            picSquare.appendChild(information_frame);
             // 1-3-1.新增information區塊
             let information=document.createElement("div");
-            information.setAttribute("class","information")
+            information.setAttribute("class","information");
             information_frame.appendChild(information);
             // 1-3-1-1.新增MRT區塊
             let mrt_box=document.createElement("div");
@@ -42,12 +42,13 @@ function attractionsLoad(attractions_img, attractions_name, attractions_mrt, att
             let category=document.createTextNode(attractions_cat);
             category_box.appendChild(category);
     
-            let attractions=document.querySelector(".attractions")
-            attractions.appendChild(picSquare) 
-}
+            let attractions=document.querySelector(".attractions");
+            attractions.appendChild(picSquare); 
+};
 // 全域變數(Part 2-3會需要使用到)
-let page=0
-let attractionSearch=""
+let page=0;
+let attractionSearch="";
+let isLoading=false;    // 追蹤、記錄目前頁面是否正在載入 API(true 代表正在載入其他 API)
 
 //Part 2-2：串接景點 API，取得並展⽰第⼀⾴的景點資訊
 fetch("/api/attractions").then(function(response){
@@ -157,7 +158,8 @@ setTimeout(function(){
     function callback(entry){
         if(entry[0].isIntersecting){
             // 如果沒有下一頁的話，就不會再去連線取資料
-            if (page!==null){ 
+            if (page!==null & isLoading==false){    // 偵測頁面滑到底部，檢查 isLoading，如果是 true 代表正在載入其他 API，先不要動作。若是 false 才動作。
+                isLoading=true; // 表示現在開始要呼叫 API 
                 fetch("/api/attractions?page="+page+"&keyword="+attractionSearch).then(function(response){
                     return response.json(); 
                 }).then(function(data){
@@ -175,6 +177,7 @@ setTimeout(function(){
                     }else{
                         page=null;
                     } 
+                    isLoading=false; // fetch() 載入完畢，取得後端回應後，將 isLoading 設定為 false，表示現在沒有在載入 API 
                 })
             }
         }

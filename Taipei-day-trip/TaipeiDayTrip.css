@@ -112,6 +112,7 @@ body{
     box-sizing: border-box;
     width: 400px;
     height: 100%;
+    padding:15px;
     border: none;
     border-top-left-radius:5px;
     border-bottom-left-radius:5px;   
@@ -121,7 +122,6 @@ body{
     align-items:center;
     width: 370px;
     font-size: 16px;
-    padding:15px;
     color: #757575;
 }
 .categorylist{
@@ -198,6 +198,7 @@ body{
 .pic img{
     width:100%;
     height:197px;
+    object-fit: cover;
     border-radius:5px;
 }
 .name_frame{
@@ -208,7 +209,6 @@ body{
     background: #000000;
     opacity: 0.6;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 .name{
@@ -218,6 +218,7 @@ body{
     font-size: 16px;
     font-weight:bold;
     color: #FFFFFF;
+    padding: 10px;
 }
 .information_frame{
     width: 270px;
@@ -230,13 +231,11 @@ body{
     border-radius:0px 5px;
 }
 .information{
-    flex:none;
     width: 250px;
     height: 25px;
     padding: 10px;
     align-items:center;
     display:flex;
-    justify-content: center;
 }
 .mrt{
     flex:none;
@@ -277,10 +276,10 @@ body{
     color: #FFFFFF;
 }
 
-@media (max-width:360px){
+@media (max-width:600px){
     .frame{
         display:flex;
-        width:360px;
+        width:100%;
         height:54px;
     }
     .title{
@@ -295,15 +294,15 @@ body{
         object-position:0% 0%;
     }
     .slogan{
-        width: 100%;
+        width: 90%;
         bottom: 260px;
     }
     .sloganframe{
-        width: 100%;
-        margin: 20px;
+        width:100%;
+        margin: auto;
     }
     .slogantext{
-        width: 300px;
+        width: 100%;
     }
     .explore{
         font-size: 16px;
@@ -317,7 +316,7 @@ body{
     }
     ::placeholder{
         width: 195px;
-        height: 16px;
+        height: 20px;
     }
     .categorylist{
         width: 320px;
@@ -327,19 +326,24 @@ body{
         font-size: 14px;
     }
     .attractions_frame{
+        display:flex;
         margin:55px auto 0px;
-        width:352px; 
+        width:100%;
+        min-width:352px;
         height:100%;
     }
     .attractions{
-        width: 320px;
-        height: 100%;
+        width:100%;
+        height:100%;
         grid-template-columns:repeat(1, 1fr);
         grid-template-rows:repeat(12, 1fr);
         grid-gap:15px;
+        justify-items: center;
+        margin: 0px;
+        padding:15px;
     }
     .pic{ 
-        width: 320px;
+        width:100%;
         height:280px;
         bottom:0px;
     }
@@ -351,12 +355,12 @@ body{
         width: 100%;
     }
     .name{
-        width: 300px;
+        width: 100%;
     }
     .information_frame{
         width: 100%;
     }
     .information{
-        width: 300px;
+        width: 100%;
     }
 }
