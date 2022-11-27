@@ -141,7 +141,7 @@ function hideCategory(){
     },150)
 }
 
-// Part 2-3：完成⾃動載入後續⾴⾯的功能
+// Part 2-3：完成⾃動載入後續⾴⾯的功能(利⽤ IntersectionObserver 物件)
 setTimeout(function(){
     let footer = document.querySelector(".footer");
     let options = {
@@ -154,6 +154,7 @@ setTimeout(function(){
 
     // 建立觀察器（observer）
     let observer= new IntersectionObserver(callback, options);
+    observer.observe(footer);  // 開始觀察目標
     // callback 就是當目標（entry）進入到觀察器的鏡頭（root）內時，要做什麼事的 function
     function callback(entry){
         if(entry[0].isIntersecting){
@@ -182,5 +183,4 @@ setTimeout(function(){
             }
         }
     }
-    observer.observe(footer);  // 開始觀察目標
 },1000)   
