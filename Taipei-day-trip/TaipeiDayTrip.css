@@ -1,0 +1,401 @@
+body{
+    margin:0;
+    padding:0;
+}
+.frameColor{
+    background: #FFFFFF;
+    position: sticky;
+    top:0px;
+    z-index:2;
+}
+.frame{
+    display:flex;
+    width:1200px;
+    height:54px;
+    margin:auto;
+    background: #FFFFFF;
+    align-items: center;
+}
+.title{
+    flex:none;
+    width:150px;
+    height:34px;
+    font-size:30px;
+    font-weight:700;
+    color: #448899;
+    text-align:center;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-right:885px;
+}
+.reserve{
+    flex:none;
+    width:64px;
+    height:16px;
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-right:20px;
+}
+.sign{
+    flex:none;
+    width: 71px;
+    height: 16px; 
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-right:10px;
+}
+.welcome{
+    width: 100%;
+    height: 320px;
+    margin-bottom:40px;
+}
+.oneOone{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    object-position:100% 0%;
+}
+.slogan{
+    width: 1200px;
+    height: 169px;
+    margin: auto;
+    position:relative;
+    bottom: 245px;
+}
+.sloganframe{
+    width: 1180px;
+    height: 149px;
+    margin: 10px;
+}
+
+.slogantext{
+    width: 1180px;
+    height: 78px;
+    margin-bottom: 25px;
+}
+.enjoy{
+    width: 100%;
+    height: 41px;
+    font-weight:700;
+    font-size: 28px;
+    color: #F8F8F8;
+    text-shadow: 0px 0px 30px #AABBCC;
+    margin-bottom: 15px;
+}
+.explore{
+    width: 100%;
+    height: 22px;
+    font-weight:700;
+    font-size: 18px;
+    color: #F8F8F8;
+    margin-bottom: 25px; 
+}
+.search{
+    width: 100%;
+    height: 46px;
+}
+.searchbar{
+    display:flex;
+    width: 460px;
+    height: 46px;
+}
+.searchbar input {
+    flex:none;
+    box-sizing: border-box;
+    width: 400px;
+    height: 100%;
+    padding:15px;
+    border: none;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;   
+}
+::placeholder{
+    justify-content:center;
+    align-items:center;
+    width: 370px;
+    font-size: 16px;
+    color: #757575;
+}
+.categorylist{
+    display:none;   /*顯示用display:grid;*/
+    grid-template-columns:repeat(3, 1fr);
+    grid-template-rows:repeat(3, 1fr);
+    align-items:center;
+    justify-items:center;
+    width: 400px;
+    height: 162px;
+    border-radius:5px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px #AABBCC;
+    margin-top:5px;
+    position: absolute;
+    z-index:1;
+}
+.categories{
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    line-height: 40px;
+    text-align: center;
+    color: #000000;
+}
+
+/* 分類游標指到的底框調整*/
+.categories:hover{
+    background-color: antiquewhite;
+    cursor: pointer;
+    border-radius:5px;
+}
+
+.button{
+    flex:none;
+    width: 60px;
+    height: 46px;  
+    background: #448899;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+}
+.button img{
+    width:30px; 
+    height:30px;
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:8px;
+    padding-bottom:8px;
+}
+.attractions_frame{
+    margin-left: auto;
+    margin-right: auto;
+    width:1200px; 
+    height:100%;
+}
+.attractions{
+    display:grid;
+    width: 1170px;
+    height: 100%;
+    margin: 15px;
+    grid-template-columns:repeat(4, 1fr);
+    grid-template-rows:repeat(3, 1fr);
+    grid-gap:30px;
+}
+
+.pic{ 
+    width: 270px;
+    height:242px;
+    background: #FFFFFF;
+    position:relative;
+    border:solid 1px #e8e8e8;
+    border-radius:5px;
+}
+.pic img{
+    width:100%;
+    height:197px;
+    object-fit: cover;
+    border-radius:5px;
+}
+.name_frame{
+    width: 270px;
+    height: 40px;
+    position:absolute;
+    bottom: 45px;
+    background: #000000;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+}
+.name{
+    width: 250px;
+    height: 20px;
+    font-weight: 700;
+    font-size: 16px;
+    font-weight:bold;
+    color: #FFFFFF;
+    padding: 10px;
+}
+.information_frame{
+    width: 270px;
+    height: 45px;
+    background-color:#FFFFFF;
+    position:absolute;
+    bottom:0px;
+    display:flex;
+    justify-content: center;
+    border-radius:0px 5px;
+}
+.information{
+    width: 250px;
+    height: 25px;
+    padding: 10px;
+    align-items:center;
+    display:flex;
+}
+.mrt{
+    flex:none;
+    width:50%;
+    height: 25px;
+    line-height:25px;
+    font-size:16px;
+    color:#757575;
+}
+.category {
+    flex:none;
+    width:50%;
+    height: 25px;
+    line-height:25px;
+    font-size:16px;
+    color:#757575;
+    text-align: end;
+}
+.footer{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position: absolute;
+    width: 100%;
+    height: 104px;
+    margin-top:40px;
+    background: #757575;
+    position:absolute;
+}
+.footerText{
+    width:234px;
+    height: 14px;
+    line-height:14px;
+    font-size: 14px;
+    text-align: center;
+    padding-top:45px;
+    padding-bottom:45px;
+    color: #FFFFFF;
+}
+
+@media (max-width:1200px){
+    .frame{
+        display:flex;
+        width:100%;
+        height:54px;
+    }
+    .title{
+        margin-right:auto;
+    }
+    .slogan{
+        width: 90%;
+    }
+    .sloganframe{
+        width:100%;
+        margin: auto;
+    }
+    .slogantext{
+        width: 100%;
+    }
+    .attractions_frame{
+        width:95%; 
+    }
+    .attractions{
+        width: 95%;
+        grid-template-columns:repeat(2, 1fr);
+        grid-template-rows:repeat(6, 1fr);
+        margin: auto;
+        padding:15px;
+        grid-gap:20px;
+    }
+    .pic{ 
+        width:100%;
+        height:252px;
+        bottom:0px;
+    }
+    .pic img{
+        height:210px;
+    }
+    .name_frame{
+        width: 100%;
+    }
+    .name{
+        width: 100%;
+    }
+    .information_frame{
+        width: 100%;
+    }
+    .information{
+        width: 100%;
+    }
+}
+
+@media (max-width:600px){
+    .title{
+        margin-left:10px;
+        margin-right:35px;
+    }
+    .reserve{
+        margin-left: auto;
+    }
+    .welcome{
+        width: 100%;
+        height: 320px;
+    }
+    .oneOone{
+        object-position:0% 0%;
+    }
+    .slogan{
+        bottom: 260px;
+    }
+    .explore{
+        font-size: 16px;
+    }
+    .searchbar{
+        width: 280px;
+    }
+    .searchbar input {
+        width: 225px;
+        height: 46px;
+    }
+    ::placeholder{
+        width: 195px;
+        height: 20px;
+    }
+    .categorylist{
+        width: 320px;
+    }
+    .categories{
+        width: 98px;
+        font-size: 14px;
+    }
+    .attractions_frame{
+        display:flex;
+        margin:55px auto 0px;
+        width:100%;
+        min-width:352px;
+        height:100%;
+    }
+    .attractions{
+        grid-template-columns:repeat(1, 1fr);
+        grid-template-rows:repeat(12, 1fr);
+        grid-gap:15px;
+    }
+    .pic{ 
+        width:100%;
+        height:280px;
+        bottom:0px;
+    }
+    .pic img{
+        width:100%;
+        height:235px;
+    }
+    .name_frame{
+        width: 100%;
+    }
+    .name{
+        width: 100%;
+    }
+    .information_frame{
+        width: 100%;
+    }
+    .information{
+        width: 100%;
+    }
+}
