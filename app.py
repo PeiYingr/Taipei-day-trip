@@ -152,6 +152,7 @@ def api_attraction(attractionId):
 		cursor.execute(id_search, (attractionId,))
 		result_attraction = cursor.fetchone()
 		if result_attraction:
+			image = result_attraction[9].split(",")
 			response_json={
 							"data":{
 								"id" :result_attraction[0], 
@@ -163,9 +164,7 @@ def api_attraction(attractionId):
 								"mrt" : result_attraction[6],
 								"lat" : result_attraction[7],
 								"lng" : result_attraction[8],
-								"images" :[
-									result_attraction[9]
-								]
+								"images" : image
 							}
 						}
 			response = make_response(jsonify(response_json),200)
