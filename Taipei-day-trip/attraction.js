@@ -24,6 +24,17 @@ fetch("/api"+path).then(function(response){
 }).then(function(data){
     let attraction_data=data.data;
     attraction_img = attraction_data.images;
+    let picture = document.querySelector(".picture");
+    picture.innerHTML="<img src="+ attraction_img[0] +">"
+    +"<div class='prev' onclick='plusSlides(-1)'></div>"
+    +"<div class='next' onclick='plusSlides(+1)'></div>"
+    +"<div class='dots'></div>";
+    let dots = document.querySelector(".dots");
+    for(let i=1;i<attraction_img.length+1;i++){
+        dots.innerHTML+="<div class='dot' onclick='changeSlide("+i+")'></div>"
+    }
+    let dot = document.getElementsByClassName("dot");
+    dot[0].style.backgroundColor ="#000000"
 
     let attraction_name=attraction_data.name;
     let name = document.querySelector(".name");
