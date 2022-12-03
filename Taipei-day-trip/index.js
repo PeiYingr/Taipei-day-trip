@@ -1,5 +1,6 @@
 function attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat, attractions_id){
             // 新增照片+景點資訊+連結的大div區塊
+            // Part 3 - 4：在⾸⾴中加入連結
             let a=document.createElement("a");
             a.setAttribute("href", "/attraction/" + attractions_id); 
 

@@ -1,3 +1,4 @@
+// Part 3 - 3：完成訂購導覽中的時段選擇
 function forenoonRadio(elem){
     elem.style.background= "#448899";
     let priceCost=document.querySelector(".priceCost");
@@ -71,7 +72,7 @@ function plusSlides(n) {
 function changeSlide(n) {
     showSlides(slideIndex=n);
   }
-//
+// Part 3 - 5：完成景點圖片輪播效果
 function showSlides(y) {
     let slides = attraction_img;
     if(y > slides.length){
