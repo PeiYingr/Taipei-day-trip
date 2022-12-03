@@ -1,5 +1,5 @@
 function attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat, attractions_id){
-            // 新增照片+景點資訊+單一頁面連結的大div區塊
+            // 新增照片+景點資訊+連結的大div區塊
             let a=document.createElement("a");
             a.setAttribute("href", "/attraction/" + attractions_id); 
 
@@ -176,7 +176,8 @@ setTimeout(function(){
                         let attractions_name=attractions_data[i].name;
                         let attractions_mrt=attractions_data[i].mrt;
                         let attractions_cat=attractions_data[i].category;
-                        attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat);
+                        let attractions_id=attractions_data[i].id;
+                        attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat, attractions_id);
                     }
                     let nextPage=data.nextPage;
                     if(nextPage!==null){
