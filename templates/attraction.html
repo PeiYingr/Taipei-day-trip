@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+        <meta charset="utf-8"/>
+        <title>台北一日遊-景點</title>
+        <link rel="stylesheet" type="text/css" href="/CSS/attraction.css">
+    </head>
+    <body>
+        <div class="frameColor">
+            <div class="frame">
+                <div class="title">台北一日遊</div>
+                <div class="reserve">預定行程</div>
+                <div class="sign">登入/註冊</div>
+            </div>
+        </div>
+        <div class="attractionSection">
+            <div class="picture">
+                <div class="prev" onclick="plusSlides(-1)"></div>
+                <div class="next" onclick="plusSlides(+1)"></div>
+                <div class="dots">
+                    <!-- <div class="dot" onclick="changeSlide(0)"></div> -->
+                </div>
+            </div>
+            <div class="profile">
+                <div class="name"></div>
+                <div class="information"></div>
+                <div class="bookingform">
+                    <div class="bookingText">訂購導覽行程</div>
+                    <div class="bookingSlogan">以此景點為中心的一日行程，帶您探索程式角落故事</div>
+                    <div class="date">
+                        <div class="selectDate">選擇日期 :</div>
+                        <div class="inputFrame"><input type="date"></input></div>
+                    </div>
+                    <div class="time">
+                        <div class="selectTime">選擇時間 :</div>
+                        <div class="forenoon" >
+                            <input type="radio" class="radioButton" onfocus="forenoonRadio(this)" onblur="whiteColor(this)" >
+                            <div class="timeText">上半天</div>
+                        </div>
+                        <div class="afternoon">
+                            <input type="radio" class="radioButton" onfocus="afternoonRadio(this)" onblur="whiteColor(this)">
+                            <div class="timeText">下半天</div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <div class="priceText">導覽費用 :</div>
+                        <div class="priceCost"></div>
+                    </div>
+                    <div class="startReserve">
+                        <div class="startReserveText">開始預約行程</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr">
+        <div class="informations">
+            <div class="introduction"></div>
+            <div class="address">
+                <div class="addressTitle">景點地址 :</div>
+                <div class="addressText"></div>
+            </div>
+            <div class="transport">
+                <div class="transportTitle">交通方式 :</div>
+                <div class="transportText"></div>                
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footerText">COPYRIGHT © 2021 台北一日遊</div>
+        </div>
+        <script src="/JS/attraction.js"></script>
+    </body>
+</html>

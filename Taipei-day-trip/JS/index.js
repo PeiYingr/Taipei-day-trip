@@ -1,7 +1,13 @@
-function attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat){
-            // 新增照片+景點資訊的大div區塊
+function attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat, attractions_id){
+            // 新增照片+景點資訊+連結的大div區塊
+            // Part 3 - 4：在⾸⾴中加入連結
+            let a=document.createElement("a");
+            a.setAttribute("href", "/attraction/" + attractions_id); 
+
             let picSquare=document.createElement("div");
             picSquare.setAttribute("class","pic");
+            a.appendChild(picSquare);
+
             // 1-1.新增照片區塊
             let newpic=document.createElement("img");
             newpic.setAttribute("src",attractions_img);
@@ -43,7 +49,7 @@ function attractionsLoad(attractions_img, attractions_name, attractions_mrt, att
             category_box.appendChild(category);
     
             let attractions=document.querySelector(".attractions");
-            attractions.appendChild(picSquare); 
+            attractions.appendChild(a); 
 };
 // 全域變數(Part 2-3會需要使用到)
 let page=0;
@@ -60,7 +66,8 @@ fetch("/api/attractions").then(function(response){
         let attractions_name=attractions_data[i].name;
         let attractions_mrt=attractions_data[i].mrt;
         let attractions_cat=attractions_data[i].category;
-        attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat);
+        let attractions_id=attractions_data[i].id;
+        attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat, attractions_id);
     }
 
     let nextPage=data.nextPage;
@@ -170,7 +177,8 @@ setTimeout(function(){
                         let attractions_name=attractions_data[i].name;
                         let attractions_mrt=attractions_data[i].mrt;
                         let attractions_cat=attractions_data[i].category;
-                        attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat);
+                        let attractions_id=attractions_data[i].id;
+                        attractionsLoad(attractions_img, attractions_name, attractions_mrt, attractions_cat, attractions_id);
                     }
                     let nextPage=data.nextPage;
                     if(nextPage!==null){
