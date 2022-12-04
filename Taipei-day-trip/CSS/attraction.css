@@ -374,9 +374,6 @@ body{
 }
 
 @media (max-width:865px){
-    .frameColor{
-        border:none;
-    }
     .title{
         margin-left:10px;
         margin-right:35px;
