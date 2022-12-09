@@ -1,5 +1,9 @@
 from flask import *
 import mysql.connector
+import jwt
+key = "jwt_secret"
+import datetime
+from flask_bcrypt import Bcrypt
 
 app=Flask(__name__,static_folder="static", static_url_path="/")
 app.config["JSON_AS_ASCII"]=False
@@ -34,6 +38,129 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
+
+bcrypt = Bcrypt(app)
+# signup
+@app.route("/api/user", methods=["POST"])
+def signup():
+	try:
+		front_request=request.get_json()
+		name=front_request["name"]
+		email=front_request["email"]
+		password=front_request["password"]
+		pw_hash = bcrypt.generate_password_hash(password)
+		connection_object = connection_pool.get_connection()
+		cursor =  connection_object.cursor()
+		query=("SELECT email FROM user WHERE email=%s")
+		cursor.execute(query, (email,))
+		result = cursor.fetchone()
+		if result:
+			response_error={
+				"error": True,
+				"message": "註冊失敗，此 Email 已註冊過"
+			}
+			response = make_response(jsonify(response_error), 400)
+			return response 
+		else:
+			add_member="INSERT INTO user(name, email, password) VALUES (%s, %s, %s)"
+			newdata=(name, email, pw_hash)
+			cursor.execute(add_member, newdata)
+			connection_object.commit()
+			response_ok={
+				"ok": True
+			}
+			response = make_response(jsonify(response_ok), 200)
+			return response 
+	except:
+		response_error={
+			"error": True,
+			"message": "伺服器內部錯誤"
+			}
+		response = make_response(jsonify(response_error), 500)
+		return response
+	finally:
+		cursor.close()
+		connection_object.close()
+
+
+# signin 
+@app.route("/api/user/auth", methods=["PUT"])
+def signin():
+	try:
+		front_request=request.get_json()
+		email=front_request["email"]
+		password=front_request["password"]
+		connection_object = connection_pool.get_connection()
+		cursor =  connection_object.cursor()
+		query=("SELECT id, name, email, password FROM user WHERE email=%s")
+		cursor.execute(query, (email,))
+		result = cursor.fetchone()
+		if result:		
+			check_password = bcrypt.check_password_hash(result[3], password)
+			if email==result[2] and check_password:
+				response_ok={
+					"ok": True
+				}
+				token = jwt.encode(
+					{"id":result[0],
+					"name":result[1], 
+					"email":result[2]},
+					"jwt_secret", 
+					algorithm="HS256")
+				response = make_response(jsonify(response_ok), 200)
+				expiretime=datetime.datetime.now() + datetime.timedelta(days=7)
+				response.set_cookie("token", token, expires=expiretime)
+				return response 
+		response_error={
+			"error": True,
+			"message": "電子郵件或密碼輸入錯誤"
+		}
+		response = make_response(jsonify(response_error), 400)
+		return response 
+	except:
+		response_error={
+			"error": True,
+			"message": "伺服器內部錯誤"
+			}
+		response = make_response(jsonify(response_error), 500)
+		return response
+	finally:
+		cursor.close()
+		connection_object.close()
+
+# get signin information
+@app.route("/api/user/auth", methods=["GET"])
+def get_signin():
+	front_token=request.cookies.get("token")
+	if front_token:
+		user_token=jwt.decode(
+			front_token, 
+			"jwt_secret", 
+			algorithms=["HS256"])
+		response_end={
+			"data": {
+				"id": user_token["id"],
+				"name": user_token["name"],
+				"email":  user_token["email"]
+			}
+		}
+	else:
+		response_end={
+			"data":None
+		}
+	response = make_response(jsonify(response_end), 200)
+	return response 
+
+
+# signout
+@app.route("/api/user/auth", methods=["DELETE"])
+def signout():
+	response_ok={
+		"ok": True
+	}
+	response = make_response(jsonify(response_ok), 200)
+	response.set_cookie("token", "", expires=0)
+	return response
 
 # 取得景點資料列表
 @app.route("/api/attractions")
