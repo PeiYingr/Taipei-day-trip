@@ -1,0 +1,217 @@
+body{
+    margin:0;
+    padding:0;
+}
+.frameColor{
+    background: #FFFFFF;
+    position: sticky;
+    top:0px;
+    z-index:2;
+}
+.frame{
+    display:flex;
+    width:1200px;
+    height:54px;
+    margin:auto;
+    background: #FFFFFF;
+    align-items: center;
+}
+.title{
+    flex:none;
+    width:150px;
+    height:34px;
+    font-size:30px;
+    font-weight:700;
+    color: #448899;
+    text-align:center;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-right:885px;
+    cursor: pointer;
+}
+.reserve{
+    flex:none;
+    width:64px;
+    height:18px;
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    line-height: 18px;
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-right:20px;
+}
+.sign{
+    flex:none;
+    width: 75px;
+    height: 18px; 
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-right:10px;
+}
+.signoutText{
+    display:none;
+    flex:none;
+    width: 75px;
+    height: 18px; 
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-right:10px; 
+}
+.reserve:hover,.sign:hover, .signoutText:hover{
+    font-weight: bold;
+    background-color: antiquewhite;
+    cursor: pointer;
+    border-radius:5px;
+}
+/*signin、signup*/
+.signinWindow{
+    display: none;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.25);
+    position: fixed;
+    z-index: 5;
+}
+.signinSection{
+    width: 340px;
+    height:auto;
+    margin: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    position:relative;
+    top:80px;
+}
+.signupSection{
+    width: 340px;
+    height: auto;
+    margin: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    position:relative;
+    top:80px;
+    display:none;
+}
+.decoratorBar{
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-bottom:15px;
+}   
+.closeIcon{
+    background-image: url("/Images/icon_close.png");
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top:27px;
+    right:17px;
+    cursor: pointer;
+}
+.signinMain{
+    width: 310px;
+    height: auto;
+    margin:auto;
+}
+.signupMain{
+    width: 310px;
+    height: auto;
+    margin:auto;
+}
+.signinText,.signupText{
+    width:100%;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 27px;
+    text-align: center;
+    color: #666666;
+    margin-bottom:15px;
+}
+.signinEmail, .signinPassword, .signupName, .signupEmail, .signupPassword{
+    width: 100%;
+    height: 47px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    color: #757575;
+    margin-bottom: 10px;
+}
+.signinButton, .signupButton{
+    border:0;
+    width: 100%;
+    height: 47px;
+    background: #448899;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 27px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+.signinResult, .signupResult{
+    width: 100%;
+    height: 22px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.changeToSignup, .changeToSignin{
+    width: 100%;
+    height: 22px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #666666; 
+    padding-bottom: 10px;
+}
+.signinButton:hover, .signupButton:hover,.changeToSignup:hover, .changeToSignin:hover{
+    font-weight: bold;
+    cursor: pointer;
+    border-radius:5px;
+}
+.footer{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position: absolute;
+    width: 100%;
+    height: 104px;
+    margin-top:40px;
+    background: #757575;
+    position:absolute;
+}
+.footerText{
+    width:234px;
+    height: 14px;
+    line-height:14px;
+    font-size: 14px;
+    text-align: center;
+    padding-top:45px;
+    padding-bottom:45px;
+    color: #FFFFFF;
+}
