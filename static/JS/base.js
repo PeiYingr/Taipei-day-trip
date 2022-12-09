@@ -63,10 +63,9 @@ function signup(){
     signupMain.insertBefore(signupResult,changeToSignin);            
 }
 
-
+const signinMain=document.querySelector(".signinMain")
 const signinResult=document.createElement("div");
-signinResult.setAttribute("class","signinResult");
-const signinMain=document.querySelector(".signinMain");
+signinResult.setAttribute("class","signinResult");;
 // signin API
 function signin(){
     const signinEmail = document.querySelector(".signinEmail").value
@@ -74,7 +73,6 @@ function signin(){
     if(signinEmail ==""|| signinPassword==""){
         signinResult.setAttribute("style","color:#8B0000");        
         signinResult.innerHTML="未輸入Email或密碼"; 
-        const signinMain=document.querySelector(".signinMain");
         const changeToSignup=document.querySelector(".changeToSignup");
         signinMain.insertBefore(signinResult,changeToSignup);    
     }else{
