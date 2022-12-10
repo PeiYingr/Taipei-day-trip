@@ -1,19 +1,17 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
     <head>
+        {% block head%}
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
         <meta charset="utf-8"/>
         <title>台北一日遊</title>
+        <link rel="stylesheet" type="text/css" href="CSS/base.css">
         <link rel="stylesheet" type="text/css" href="CSS/TaipeiDayTrip.css">
+        {% endblock head%}
     </head>
     <body>
-        <div class="frameColor">
-            <div class="frame">
-                <div class="title">台北一日遊</div>
-                <div class="reserve">預定行程</div>
-                <div class="sign">登入/註冊</div>
-            </div>
-        </div>
+        {% block content %}
         <div class="welcome">
             <img src="Images/welcome image.jpg" class="oneOone"/>
             <div class="slogan">
@@ -53,9 +51,10 @@
                 </div> -->
             </div>
         </div>
-        <div class="footer">
-            <div class="footerText">COPYRIGHT © 2021 台北一日遊</div>
-        </div>
+        {% endblock content %} 
+        {% block script %}
+        <script src="JS/base.js"></script>
         <script src="JS/index.js"></script>
+        {% endblock script %} 
     </body>
 </html>
