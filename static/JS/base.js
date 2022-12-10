@@ -15,10 +15,16 @@ const signupSection=document.querySelector(".signupSection");
 function changeToSignup(){
     signinSection.style.display="none";
     signupSection.style.display="block";
+    if(signupResult){
+        signupResult.remove();
+    }   
 }
 function changeToSignin(){
     signinSection.style.display="block";
     signupSection.style.display="none";
+    if(signinResult){
+        signinResult.remove();
+    }   
 }
 
 // signup API
@@ -77,8 +83,8 @@ function signin(){
         signinMain.insertBefore(signinResult,changeToSignup);    
     }else{
         const member = { 
-        "email":signinEmail,
-        "password":signinPassword
+            "email":signinEmail,
+            "password":signinPassword
         }; 
         fetch("/api/user/auth",{
             method:"PUT",
@@ -95,7 +101,10 @@ function signin(){
                 signinResult.setAttribute("style","color:#8B0000");        
                 signinResult.innerHTML=data.message; 
                 const changeToSignup=document.querySelector(".changeToSignup");
-                signinMain.insertBefore(signinResult,changeToSignup);  
+                signinMain.insertBefore(signinResult,changeToSignup);
+                if(signinResult){
+                    signinMain.removeChild(signinResult);
+                }     
             }  
             if(data.ok == true){
                 location.reload();
