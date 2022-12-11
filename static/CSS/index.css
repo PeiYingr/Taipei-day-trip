@@ -116,7 +116,7 @@
     background:#699fad;
 }
 .button:active{
-    transform:translateX(10px) rotate(10deg) translateY(5px);
+    transform:translateX(4px) rotate(5deg) translateY(2px);
 }
 .button img{
     width:30px; 
