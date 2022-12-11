@@ -3,11 +3,8 @@
 <html>
     <head>
         {% block head%}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
-        <meta charset="utf-8"/>
         <title>台北一日遊</title>
-        <link rel="stylesheet" type="text/css" href="CSS/base.css">
-        <link rel="stylesheet" type="text/css" href="CSS/TaipeiDayTrip.css">
+        <link rel="stylesheet" type="text/css" href="/CSS/index.css">
         {% endblock head%}
     </head>
     <body>
@@ -23,14 +20,12 @@
                     <div class="search">
                         <div class="searchbar" >
                             <input type="text" name="name" id="keyword" placeholder="輸入景點名稱查詢" autocomplete="off" onclick="showCategory()" onblur="hideCategory()" />
-                            <div class="button"                   
-                            onclick="getData();"><img src="Images/icon_search.png" align="middle" />
+                            <div class="button" onclick="getData();">
+                                <img src="Images/icon_search.png" align="middle" />
                             </div>
                         </div>
-                    <div class="categorylist">
-                        <!-- <div class="categories"></div> -->
                     </div>
-                    </div>
+                    <div class="categorylist"><!-- <div class="categories"></div> --></div>
                 </div>
             </div> 
         </div>  
@@ -53,8 +48,7 @@
         </div>
         {% endblock content %} 
         {% block script %}
-        <script src="JS/base.js"></script>
-        <script src="JS/index.js"></script>
+        <script src="/JS/index.js"></script>
         {% endblock script %} 
     </body>
 </html>

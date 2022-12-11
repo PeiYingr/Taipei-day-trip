@@ -3,10 +3,7 @@
 <html>
     <head>
         {% block head%}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
-        <meta charset="utf-8"/>
         <title>台北一日遊-景點</title>
-        <link rel="stylesheet" type="text/css" href="/CSS/base.css">
         <link rel="stylesheet" type="text/css" href="/CSS/attraction.css">
         {% endblock head%}
     </head>
@@ -33,11 +30,11 @@
                     <div class="time">
                         <div class="selectTime">選擇時間 :</div>
                         <div class="forenoon" >
-                            <input type="radio" class="radioButton" onfocus="forenoonRadio(this)" onblur="whiteColor(this)" >
+                            <input type="radio" class="forenoonRadioButton" onfocus="forenoonRadio(this)">
                             <div class="timeText">上半天</div>
                         </div>
                         <div class="afternoon">
-                            <input type="radio" class="radioButton" onfocus="afternoonRadio(this)" onblur="whiteColor(this)">
+                            <input type="radio" class="afternoonRadioButton" onfocus="afternoonRadio(this)">
                             <div class="timeText">下半天</div>
                         </div>
                     </div>
@@ -65,7 +62,6 @@
         </div>
         {% endblock content %} 
         {% block script %}
-        <script src="/JS/base.js"></script>
         <script src="/JS/attraction.js"></script>
         {% endblock script %} 
     </body>

@@ -59,6 +59,7 @@
     box-sizing: border-box;
     width: 400px;
     height: 100%;
+    font-size: 16px;
     padding:15px;
     border: none;
     border-top-left-radius:5px;
@@ -110,6 +111,12 @@
     border-top-right-radius:5px;
     border-bottom-right-radius:5px;
     cursor: pointer;
+}
+.button:hover{
+    background:#699fad;
+}
+.button:active{
+    transform:translateX(4px) rotate(5deg) translateY(2px);
 }
 .button img{
     width:30px; 
