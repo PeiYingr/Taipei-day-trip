@@ -28,11 +28,12 @@ fetch("/api/user/auth").then(function(response){    //method:"GET"
         }).then(function(data){
             usernameText.innerHTML = username;
             if(data.data == null){
-                showReservation.style.display="none";
-                noReservation.style.display="block";
-                afterfooter.style.display="block";
+                return;
             }
             else{
+                showReservation.style.display="block";
+                noReservation.style.display="none";
+                afterfooter.style.display="none";
                 const img = document.createElement("img");        
                 img.setAttribute("src",data.data.attraction.image);
                 picture.appendChild(img);
