@@ -30,7 +30,7 @@ def get_booking():
             user_id = user_token["id"]
             connection_object = connection_pool.get_connection()
             cursor =  connection_object.cursor()
-            get_booking = "SELECT attractions.id, attractions.name, attractions.address, attractions.images, booking.date, booking.time, booking.price FROM attractions INNER JOIN booking ON attractions.id=booking.attraction_id WHERE user_id=%s ORDER BY attractions.id DESC LIMIT 1"
+            get_booking = "SELECT attractions.id, attractions.name, attractions.address, attractions.images, booking.date, booking.time, booking.price FROM attractions INNER JOIN booking ON attractions.id=booking.attraction_id WHERE user_id=%s"
             cursor.execute(get_booking,(user_id,))
             result=cursor.fetchone()
             if result:
@@ -77,14 +77,23 @@ def new_booking():
                 algorithms=["HS256"]
             )
             user_id = user_token["id"]
+            print(user_id)
+            connection_object = connection_pool.get_connection()
+            cursor =  connection_object.cursor()
+            find_booking = "SELECT user_id FROM booking WHERE user_id=%s"
+            cursor.execute(find_booking, (user_id,))    
+            result=cursor.fetchone()
+            print(result)
+            if result:
+                delete_booking = "DELETE FROM booking WHERE user_id=%s;"
+                cursor.execute(delete_booking, (user_id,))
+                connection_object.commit()     
             front_request = request.get_json()
             attraction_id = front_request["attractionId"]
             date = front_request["date"]
             time = front_request["time"]
             price = front_request["price"]
             if date and time:
-                connection_object = connection_pool.get_connection()
-                cursor =  connection_object.cursor()
                 new_booking = "INSERT INTO booking(user_id, attraction_id, date, time, price) VALUES (%s, %s, %s, %s, %s)"
                 newdata = (user_id, attraction_id, date, time, price)
                 cursor.execute(new_booking, newdata)
