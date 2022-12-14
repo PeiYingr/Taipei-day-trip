@@ -23,7 +23,7 @@ fetch("/api/user/auth").then(function(response){    //method:"GET"
     else{
         const username = data.data.name;
         const useremail = data.data.email;
-        fetch("/api/booking").then(function(response){
+        fetch("/api/booking").then(function(response){  //method:"GET"
             return response.json();  
         }).then(function(data){
             usernameText.innerHTML = username;
