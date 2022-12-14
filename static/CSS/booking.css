@@ -19,18 +19,16 @@
     font-size: 16px;
     line-height: 24px;
     color: #666666;
-    display:none;
 }
 .afterfooter{
     width: 100%;
     height:66%;
     background: #757575;
     position:absolute;
-    display:none;
 }
 /*withReservation*/
 .showReservation{
-    display:block;
+    display:none;
 }
 .reserveSection{
     width: 980px;
