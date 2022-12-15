@@ -1,20 +1,21 @@
-// Part 3 - 3：完成訂購導覽中的時段選擇
+// Part 3 - 3：Select time in the bookingform 
 const priceCost=document.querySelector(".priceCost");
 const forenoonRadioButton=document.querySelector(".forenoonRadioButton");
 const afternoonRadioButton=document.querySelector(".afternoonRadioButton");
-function forenoonRadio(){
+forenoonRadioButton.addEventListener("click",function(){
     forenoonRadioButton.style.background= "#448899";
     afternoonRadioButton.style.background= "#FFFFFF";
-    priceCost.innerHTML="新台幣 2000元"
-}
-function afternoonRadio(){
+    priceCost.innerHTML="新台幣 2000元"    
+})
+
+afternoonRadioButton.addEventListener("click",function(){
     afternoonRadioButton.style.background= "#448899";
     forenoonRadioButton.style.background= "#FFFFFF";
     priceCost.innerHTML="新台幣 2500元"
-}
+})
 
-// Part 3 - 2：串接景點 API，取得並展⽰特定景點資訊
-let path = window.location.pathname;
+// Part 3 - 2：Fetch attraction API, get data and display specific attraction information
+let path = location.pathname;
 let attraction_img;
 let slideIndex = 1;
 fetch("/api"+path).then(function(response){
@@ -59,15 +60,15 @@ fetch("/api"+path).then(function(response){
 })
 
 
-// 點擊左右按鈕
+// Click the left and right buttons of picture
 function plusSlides(n){
   showSlides(slideIndex+=n);
 }
-// 點擊圖片下方圓點
+// Click the dots of picture
 function changeSlide(n){
     showSlides(slideIndex=n);
 }
-// Part 3 - 5：完成景點圖片輪播效果
+// Part 3 - 5：Create a slideshow/carousel of attraction's picture 
 function showSlides(y){
     const slides = attraction_img;
     if(y > slides.length){
@@ -90,3 +91,51 @@ function showSlides(y){
     const dot = document.getElementsByClassName("dot");
     dot[slideIndex-1].style.backgroundColor ="#000000" 
 }
+
+// Part 5 - 4：Create new booking
+const startReserveButton = document.querySelector(".startReserveButton");
+const noticeMain= document.querySelector(".noticeMain")
+startReserveButton.addEventListener("click",function(){
+    fetch("/api/user/auth").then(function(response){    //method:"GET"
+        return response.json();
+    }).then(function(data){
+        if(data.data == null){
+            signinWindow.style.display="block";
+        }
+        else{
+            attractionPath=location.pathname.split("/")
+            const attractionId=attractionPath[2];
+            const date = document.querySelector('input[type="date"]').value;
+            const time = document.querySelector('input[name="radio"]:checked');
+            const price=priceCost.textContent.replace(/[^\d]/g,"");
+            if(date == ""||time == null){
+                noticeWindow.style.display="block";
+                noticeMain.innerText="未選擇日期或時間"; 
+            }else{
+                const booking = { 
+                    "attractionId":attractionId,
+                    "date":date,
+                    "time":time.value,
+                    "price":price
+                }; 
+                fetch("/api/booking",{
+                    method:"POST",
+                    body:JSON.stringify(booking),
+                    cache:"no-cache",
+                    headers:new Headers({
+                        "content-type":"application/json"
+                    })
+                }).then(function(response){    
+                    return response.json();
+                }).then(function(data){
+                    if(data.ok == true){
+                        location.href="/booking";
+                    }else{
+                        noticeWindow.style.display="block";
+                        noticeMain.innerText=data.message; 
+                    }
+                })
+            }
+        }
+    })
+})

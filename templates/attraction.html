@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        {% block head%}
+        {% block head %}
         <title>台北一日遊-景點</title>
         <link rel="stylesheet" type="text/css" href="/CSS/attraction.css">
-        {% endblock head%}
+        {% endblock head %}
     </head>
     <body>
         {% block content %}
@@ -25,16 +25,16 @@
                     <div class="bookingSlogan">以此景點為中心的一日行程，帶您探索程式角落故事</div>
                     <div class="date">
                         <div class="selectDate">選擇日期 :</div>
-                        <div class="inputFrame"><input type="date"></input></div>
+                        <div class="inputFrame"><input type="date"/></div>
                     </div>
                     <div class="time">
                         <div class="selectTime">選擇時間 :</div>
                         <div class="forenoon" >
-                            <input type="radio" class="forenoonRadioButton" onfocus="forenoonRadio(this)">
+                            <input type="radio" name="radio" class="forenoonRadioButton" value="上半天">
                             <div class="timeText">上半天</div>
                         </div>
                         <div class="afternoon">
-                            <input type="radio" class="afternoonRadioButton" onfocus="afternoonRadio(this)">
+                            <input type="radio"  name="radio" class="afternoonRadioButton" value="下半天">
                             <div class="timeText">下半天</div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                         <div class="priceCost"></div>
                     </div>
                     <div class="startReserve">
-                        <div class="startReserveText">開始預約行程</div>
+                        <div class="startReserveButton">開始預約行程</div>
                     </div>
                 </div>
             </div>

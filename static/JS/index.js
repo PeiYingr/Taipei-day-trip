@@ -78,7 +78,8 @@ fetch("/api/attractions").then(function(response){
 })
 
 // Part 2-4：完成關鍵字搜尋功能
-function getData(){
+const button=document.querySelector(".button");
+button.addEventListener("click",function(){
     attractionSearch = document.getElementById("keyword").value;
     page=0;
     fetch("api/attractions?page="+page+"&keyword="+attractionSearch).then(function(response){
@@ -102,8 +103,8 @@ function getData(){
         }else{
             page=null;
         }
-    });
-}
+    });    
+})
 
 //Part 2-5：完成景點分類關鍵字填入功能
 fetch("/api/categories").then(function(response){
@@ -123,30 +124,27 @@ fetch("/api/categories").then(function(response){
     }
 
 })
-
-function showCategory(){
-    const categorylist=document.querySelector(".categorylist");
-    categorylist.style.display="grid";
-    
+const categorylist=document.querySelector(".categorylist");
+const category = document.getElementsByClassName("categories");
+const input = document.querySelector("#keyword");
+input.addEventListener("click",function(){
+    categorylist.style.display="grid";    
     // 點選景點分類，將景點分類名稱填入搜尋框，隱藏跳出式分類區塊。
-    const category = document.getElementsByClassName("categories");
-    const input = document.querySelector("#keyword");
     for(let i=0;i<category.length;i++){
         // 點選景點分類，將景點分類名稱填入搜尋框
-        category[i].onclick=function(){
+        category[i].addEventListener("click",function(){
             input.value = this.innerText;
             categorylist.style.display="none"
-        }
-    }
-}
+        })
+    }   
+})
 
 // *onblur 和 onclick 事件衝突 : 利用 setTimeout 解決(Part 2-5(4))
-function hideCategory(){
+input.addEventListener("blur",function(){
     setTimeout(function(){
-        const categorylist=document.querySelector(".categorylist");
         categorylist.style.display="none";
     },150)
-}
+})
 
 // Part 2-3：完成⾃動載入後續⾴⾯的功能(利⽤ IntersectionObserver 物件)
 setTimeout(function(){

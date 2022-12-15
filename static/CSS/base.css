@@ -77,7 +77,7 @@ body{
     border-radius:5px;
 }
 /*signin、signup*/
-.signinWindow{
+.signinWindow,.noticeWindow{
     display: none;
     width:100%;
     height:100%;
@@ -85,7 +85,7 @@ body{
     position: fixed;
     z-index: 5;
 }
-.signinSection{
+.signinSection,.noticeSection{
     width: 340px;
     height:auto;
     margin: auto;
@@ -123,14 +123,22 @@ body{
     right:17px;
     cursor: pointer;
 }
-.signinMain{
+.closeIcon:hover{
+    transform: scale(1.2);
+}
+.signinMain,.signupMain{
     width: 310px;
     height: auto;
     margin:auto;
 }
-.signupMain{
+.noticeMain{
     width: 310px;
-    height: auto;
+    height:60px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height:60px;
+    text-align: center;
+    color: #666666;
     margin:auto;
 }
 .signinText,.signupText{
@@ -199,20 +207,42 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    position: absolute;
     width: 100%;
     height: 104px;
     margin-top:40px;
     background: #757575;
-    position:absolute;
+    position:relative;
 }
 .footerText{
     width:234px;
     height: 14px;
     line-height:14px;
     font-size: 14px;
+    font-weight: 700;
     text-align: center;
     padding-top:45px;
     padding-bottom:45px;
     color: #FFFFFF;
+}
+
+@media (max-width:1200px){
+    .frame{
+        width:98%;
+    }
+    .title{
+        margin-right:auto;
+    }
+}
+
+@media (max-width:600px) {
+    .frame{
+        width:100%;
+    }
+    .title{
+        margin-left:10px;
+        margin-right:35px;
+    }
+    .reserve{
+        margin-left: auto;
+    }
 }

@@ -61,7 +61,8 @@
     height: 100%;
     font-size: 16px;
     padding:15px;
-    border: none;
+    outline:none;
+    border:none;
     border-top-left-radius:5px;
     border-bottom-left-radius:5px;   
 }
@@ -149,12 +150,17 @@
     position:relative;
     border:solid 1px #e8e8e8;
     border-radius:5px;
+    overflow: hidden;
 }
 .pic img{
     width:100%;
     height:197px;
     object-fit: cover;
     border-radius:5px;
+}
+.pic img:hover{
+    opacity: 0.8;
+    transform: scale(1.2);
 }
 .name_frame{
     width: 270px;
@@ -211,14 +217,6 @@
 }
 
 @media (max-width:1200px){
-    .frame{
-        display:flex;
-        width:100%;
-        height:54px;
-    }
-    .title{
-        margin-right:auto;
-    }
     .slogan{
         width: 90%;
     }
@@ -263,13 +261,6 @@
 }
 
 @media (max-width:600px){
-    .title{
-        margin-left:10px;
-        margin-right:35px;
-    }
-    .reserve{
-        margin-left: auto;
-    }
     .welcome{
         width: 100%;
         height: 320px;

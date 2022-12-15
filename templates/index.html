@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        {% block head%}
+        {% block head %}
         <title>台北一日遊</title>
         <link rel="stylesheet" type="text/css" href="/CSS/index.css">
-        {% endblock head%}
+        {% endblock head %}
     </head>
     <body>
         {% block content %}
@@ -19,8 +19,8 @@
                     </div>      
                     <div class="search">
                         <div class="searchbar" >
-                            <input type="text" name="name" id="keyword" placeholder="輸入景點名稱查詢" autocomplete="off" onclick="showCategory()" onblur="hideCategory()" />
-                            <div class="button" onclick="getData();">
+                            <input type="text" name="name" id="keyword" placeholder="輸入景點名稱查詢" autocomplete="off"/>
+                            <div class="button">
                                 <img src="Images/icon_search.png" align="middle" />
                             </div>
                         </div>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+        <title>台北一日遊-預定行程</title>
+        <link rel="stylesheet" type="text/css" href="/CSS/booking.css">
+        {% endblock head %}
+    </head>
+    <body>
+        {% block content %}
+        <div class="headline">您好，<span class="usernameText"></span>，待預定的行程如下：</div>
+        <div class="noReservation">目前沒有任何待預定的行程</div>
+        <div class="showReservation">
+            <div class="reserveSection">
+                <div class="picture"><!--<img class="img"/>--></div>
+                <div class="reserveInformation">
+                    <div class="attractionText">台北一日遊：<span class="attractionName"></span></div>
+                    <div class="dateText">日期：<span class="date"></span></div>
+                    <div class="timeText">時間：<span class="time"></span></div>
+                    <div class="priceText">費用：<span class="price"></span></div>
+                    <div class="addressText">地點：<span class="address"></span></div>
+                </div>
+                <div class="deleteIcon"></div>
+            </div>
+            <hr class="hr">
+            <div class="contactForm">
+                <div class="contactInformation">您的聯絡資訊</div>
+                <div class="nameText">聯絡姓名：<input type="text" class="name" placeholder="輸入姓名" autocomplete="off"/></div>
+                <div class="emailText">聯絡信箱：<input type="text" class="email" placeholder="輸入電子信箱" autocomplete="off"/></div>
+                <div class="phoneText">手機號碼：<input type="text" class="phone" placeholder="輸入手機號碼" autocomplete="off"/></div>
+                <div class="notice">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
+            </div>
+            <hr class="hr">
+            <div class="payForm">
+                <div class="payInformation">您的聯絡資訊</div>
+                <div class="cardText">卡片號碼：<input type="text" class="cardnumber" placeholder="**** **** ****" autocomplete="off"/></div>
+                <div class="expirationDateText">過期時間：<input type="text" class="expirationDate" placeholder="MM / YY" autocomplete="off"/></div>
+                <div class="cvvText">驗證密碼：<input type="text" class="cvv" placeholder="cvv" autocomplete="off"/></div>
+            </div>
+            <hr class="hr">
+            <div class="confirm">
+                <div class="total">總價：<span class="totalPrice"></span></div>
+                <button class="bookingButton">確認訂購並付款</button>
+            </div>
+        </div>
+        {% endblock content %} 
+        {% block afterFooter %}
+        <div class="afterfooter"></div>
+        {% endblock afterFooter %} 
+        {% block script %}
+        <script src="/JS/booking.js"></script>
+        {% endblock script %} 
+    </body>
+</html>
+

@@ -4,41 +4,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
         <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="/CSS/base.css">
-        {% block head%}
-        {% endblock head%}
+        {% block head %}
+        {% endblock head %}
     </head>
     <body>
         <div class="signinWindow">
             <div class="signinSection">
                 <div class="decoratorBar"></div>
-                <div class="closeIcon" onclick="hideSigninWindow()"></div>
+                <div class="closeIcon"></div>
                 <div class="signinMain">
                     <div class="signinText">登入會員帳號</div>
-                    <input type="text" name="signinEmail" class="signinEmail" placeholder="輸入電子信箱" required autocomplete="off"/>
-                    <input type="password" name="signinPassword" class="signinPassword" placeholder="輸入密碼" required/> 
-                    <button class="signinButton"  onclick="signin()">登入帳戶</button>
-                    <div class="changeToSignup" onclick="changeToSignup()">還沒有帳戶？點此註冊</div> 
+                    <input type="text" name="signinEmail" class="signinEmail" placeholder="輸入電子信箱" autocomplete="off"/>
+                    <input type="password" name="signinPassword" class="signinPassword" placeholder="輸入密碼"/> 
+                    <button class="signinButton">登入帳戶</button>
+                    <div class="changeToSignup">還沒有帳戶？點此註冊</div> 
                 </div>
             </div>
             <div class="signupSection">
                 <div class="decoratorBar"></div>
-                <div class="closeIcon" onclick="hideSigninWindow()"></div>
+                <div class="closeIcon"></div>
                 <div class="signupMain">
                     <div class="signupText">註冊會員帳號</div>
-                    <input type="text" name="signupName" class="signupName" placeholder="輸入姓名" required autocomplete="off"/>
-                    <input type="text" name="signupEmail" class="signupEmail" placeholder="輸入電子信箱" required autocomplete="off"/>
-                    <input type="password" name="signupPassword" class="signupPassword" placeholder="輸入密碼" required/>
-                    <button class="signupButton" onclick="signup()">註冊新帳戶</button>
-                    <div class="changeToSignin" onclick="changeToSignin()">已經有帳戶了？點此登入</div> 
+                    <input type="text" name="signupName" class="signupName" placeholder="輸入姓名" autocomplete="off"/>
+                    <input type="text" name="signupEmail" class="signupEmail" placeholder="輸入電子信箱" autocomplete="off"/>
+                    <input type="password" name="signupPassword" class="signupPassword" placeholder="輸入密碼 (4-8字元，須包含字母及數字)"/>
+                    <button class="signupButton">註冊新帳戶</button>
+                    <div class="changeToSignin">已經有帳戶了？點此登入</div> 
                 </div>
+            </div>
+        </div>
+        <div class="noticeWindow">        
+            <div class="noticeSection">
+                <div class="decoratorBar"></div>
+                <div class="closeIcon"></div>
+                <div class="noticeMain"></div>
             </div>
         </div>
         <div class="frameColor">
             <div class="frame">
-                <div class="title" onclick="returnIndex()">台北一日遊</div>
+                <div class="title">台北一日遊</div>
                 <div class="reserve">預定行程</div>
-                <div class="sign" onclick="signinBlock()">登入/註冊</div>
-                <div class="signoutText" onclick="signout()">登出系統</div>
+                <div class="sign">登入/註冊</div>
+                <div class="signoutText">登出系統</div>
             </div>
         </div>
         {% block content %}
@@ -46,6 +53,8 @@
         <div class="footer">
             <div class="footerText">COPYRIGHT © 2021 台北一日遊</div>
         </div>
+        {% block afterFooter %}
+        {% endblock afterFooter %} 
         <script src="/JS/base.js"></script>
         {% block script %}
         {% endblock script %} 
