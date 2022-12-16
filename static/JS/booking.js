@@ -1,7 +1,7 @@
 const noReservation = document.querySelector(".noReservation")
 const afterfooter = document.querySelector(".afterfooter")
 const showReservation = document.querySelector(".showReservation")
-const usernameText = document.querySelector(".usernameText")
+const headline = document.querySelector(".headline")
 const picture = document.querySelector(".picture")
 const attractionName = document.querySelector(".attractionName")
 const date = document.querySelector(".date")
@@ -25,7 +25,7 @@ fetch("/api/user/auth").then(function(response){    //method:"GET"
     else{
         username = data.data.name;
         useremail = data.data.email;
-        usernameText.textContent = username;
+        headline.innerHTML = "您好，"+ username +"，待預定的行程如下："
     }
 })
 
