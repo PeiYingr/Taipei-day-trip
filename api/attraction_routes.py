@@ -1,27 +1,14 @@
 from flask import Blueprint, request, make_response, jsonify
-import mysql.connector
+from api.connection import connection_pool
 
 attractions= Blueprint("attractions",__name__)
-
-taipei_attractions = {
-    "user":"root",
-    "password":"hihi3838",
-    "host":"127.0.0.1",
-    "database":"taipei_attractions",
-}
-# create connection pool
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(
-    pool_name = "taipei_attractions",
-    pool_size = 10,
-    **taipei_attractions
-)
 
 # 取得景點資料列表
 @attractions.route("/api/attractions")
 def show_attractions():
 	try:
 		connection_object = connection_pool.get_connection()
-		cursor =  connection_object.cursor()
+		cursor =  connection_object.cursor(dictionary=True)
 		page = request.args.get("page", 0)
 		keyword = request.args.get("keyword")
 		page=int(page)
@@ -33,34 +20,34 @@ def show_attractions():
 			if len(result)>12:
 				nextpage=page+1
 				for x in result[0:12]:
-					image=x[9].split(",")
+					image=x["images"].split(",")
 					response_json={
-						"id" :x[0], 
-						"name" : x[1],
-						"category" :x[2],
-						"description" : x[3],
-						"address" : x[4],
-						"transport" : x[5],
-						"mrt" : x[6],
-						"lat" : x[7],
-						"lng" : x[8],
+						"id" :x["id"], 
+						"name" : x["name"],
+						"category" :x["category"],
+						"description" : x["description"],
+						"address" : x["address"],
+						"transport" : x["transport"],
+						"mrt" : x["mrt"],
+						"lat" : x["lat"],
+						"lng" : x["lng"],
 						"images" : image
 					}
 					attraction_list.append(response_json)
 			else:
 				nextpage=None
 				for x in result:
-					image=x[9].split(",")
+					image=x["images"].split(",")
 					response_json={
-						"id" :x[0], 
-						"name" : x[1],
-						"category" :x[2],
-						"description" : x[3],
-						"address" : x[4],
-						"transport" : x[5],
-						"mrt" : x[6],
-						"lat" : x[7],
-						"lng" : x[8],
+						"id" :x["id"], 
+						"name" : x["name"],
+						"category" :x["category"],
+						"description" : x["description"],
+						"address" : x["address"],
+						"transport" : x["transport"],
+						"mrt" : x["mrt"],
+						"lat" : x["lat"],
+						"lng" : x["lng"],
 						"images" : image
 					}
 					attraction_list.append(response_json)
@@ -73,34 +60,34 @@ def show_attractions():
 			if len(result)>12:
 				nextpage=page+1
 				for x in result[0:12]:
-					image=x[9].split(",")
+					image=x["images"].split(",")
 					response_json={
-						"id" :x[0], 
-						"name" : x[1],
-						"category" :x[2],
-						"description" : x[3],
-						"address" : x[4],
-						"transport" : x[5],
-						"mrt" : x[6],
-						"lat" : x[7],
-						"lng" : x[8],
+						"id" :x["id"], 
+						"name" : x["name"],
+						"category" :x["category"],
+						"description" : x["description"],
+						"address" : x["address"],
+						"transport" : x["transport"],
+						"mrt" : x["mrt"],
+						"lat" : x["lat"],
+						"lng" : x["lng"],
 						"images" : image
 					}
 					attraction_list.append(response_json)
 			else:
 				nextpage=None
 				for x in result:
-					image=x[9].split(",")
+					image=x["images"].split(",")
 					response_json={
-						"id" :x[0], 
-						"name" : x[1],
-						"category" :x[2],
-						"description" : x[3],
-						"address" : x[4],
-						"transport" : x[5],
-						"mrt" : x[6],
-						"lat" : x[7],
-						"lng" : x[8],
+						"id" :x["id"], 
+						"name" : x["name"],
+						"category" :x["category"],
+						"description" : x["description"],
+						"address" : x["address"],
+						"transport" : x["transport"],
+						"mrt" : x["mrt"],
+						"lat" : x["lat"],
+						"lng" : x["lng"],
 						"images" : image
 					}
 					attraction_list.append(response_json)				
@@ -128,23 +115,23 @@ def find_attraction(attractionId):
 	try:
 		attractionId = int(attractionId)
 		connection_object = connection_pool.get_connection()
-		cursor =  connection_object.cursor()
+		cursor =  connection_object.cursor(dictionary=True)
 		id_search="SELECT * FROM attractions WHERE id = %s"
 		cursor.execute(id_search, (attractionId,))
 		result_attraction = cursor.fetchone()
 		if result_attraction:
-			image = result_attraction[9].split(",")
+			image = result_attraction["images"].split(",")
 			response_json={
 				"data":{
-					"id" :result_attraction[0], 
-					"name" : result_attraction[1],
-					"category" :result_attraction[2],
-					"description" : result_attraction[3],
-					"address" : result_attraction[4],
-					"transport" : result_attraction[5],
-					"mrt" : result_attraction[6],
-					"lat" : result_attraction[7],
-					"lng" : result_attraction[8],
+					"id" :result_attraction["id"], 
+					"name" : result_attraction["name"],
+					"category" :result_attraction["category"],
+					"description" : result_attraction["description"],
+					"address" : result_attraction["address"],
+					"transport" : result_attraction["transport"],
+					"mrt" : result_attraction["mrt"],
+					"lat" : result_attraction["lat"],
+					"lng" : result_attraction["lng"],
 					"images" : image
 				}
 			}

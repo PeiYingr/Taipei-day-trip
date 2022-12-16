@@ -1,19 +1,8 @@
 from flask import Blueprint, request, make_response, jsonify
-import mysql.connector,jwt
+import jwt
+from api.connection import connection_pool
 
 bookings = Blueprint("bookings",__name__)
-taipei_attractions = {
-    "user":"root",
-    "password":"hihi3838",
-    "host":"127.0.0.1",
-    "database":"taipei_attractions",
-}
-# create connection pool
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(
-    pool_name = "taipei_attractions",
-    pool_size = 10,
-    **taipei_attractions
-)
 
 # Part 5 - 1：booking API
 # get booking information
@@ -29,23 +18,30 @@ def get_booking():
             )
             user_id = user_token["id"]
             connection_object = connection_pool.get_connection()
-            cursor =  connection_object.cursor()
-            get_booking = "SELECT attractions.id, attractions.name, attractions.address, attractions.images, booking.date, booking.time, booking.price FROM attractions INNER JOIN booking ON attractions.id=booking.attraction_id WHERE user_id=%s"
+            cursor =  connection_object.cursor(dictionary=True)
+            get_booking = """
+            SELECT 
+                attractions.id, attractions.name, 
+                attractions.address, attractions.images, 
+                booking.date, booking.time, booking.price 
+            FROM attractions INNER JOIN booking ON attractions.id=booking.attraction_id 
+            WHERE booking.user_id=%s
+            """
             cursor.execute(get_booking,(user_id,))
             result=cursor.fetchone()
             if result:
-                image = result[3].split(",")
+                image = result["images"].split(",")
                 response_end={
                     "data": {
                         "attraction": {
-                            "id": result[0],
-                            "name": result[1],
-                            "address": result[2],
+                            "id": result["id"],
+                            "name": result["name"],
+                            "address": result[ "address"],
                             "image":image[0]
                         },
-                        "date": result[4],
-                        "time": result[5],
-                        "price": result[6]
+                        "date": result["date"],
+                        "time": result["time"],
+                        "price": result["price"]
                     }
                 }
             else:
@@ -77,13 +73,11 @@ def new_booking():
                 algorithms=["HS256"]
             )
             user_id = user_token["id"]
-            print(user_id)
             connection_object = connection_pool.get_connection()
             cursor =  connection_object.cursor()
             find_booking = "SELECT user_id FROM booking WHERE user_id=%s"
             cursor.execute(find_booking, (user_id,))    
             result=cursor.fetchone()
-            print(result)
             if result:
                 delete_booking = "DELETE FROM booking WHERE user_id=%s;"
                 cursor.execute(delete_booking, (user_id,))

@@ -1,22 +1,10 @@
 from flask import Blueprint, request, make_response, jsonify
-import mysql.connector, jwt, datetime, re
+import jwt, datetime, re
 from flask_bcrypt import Bcrypt
+from api.connection import connection_pool
 
 users = Blueprint("users",__name__)
-taipei_attractions = {
-    "user":"root",
-    "password":"hihi3838",
-    "host":"127.0.0.1",
-    "database":"taipei_attractions",
-}
-# create connection pool
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(
-    pool_name = "taipei_attractions",
-    pool_size = 10,
-    **taipei_attractions
-)
 key = "jwt_secret"
-
 bcrypt=Bcrypt()
 # Part 4 - 1：user(member) system API
 # signup
@@ -82,7 +70,7 @@ def signin():
 		email=front_request["email"]
 		password=front_request["password"]
 		connection_object = connection_pool.get_connection()
-		cursor =  connection_object.cursor()
+		cursor =  connection_object.cursor(dictionary=True)
 		query=("SELECT id, name, email, password FROM user WHERE email=%s")
 		cursor.execute(query, (email,))
 		result = cursor.fetchone()
@@ -94,16 +82,16 @@ def signin():
 			response = make_response(jsonify(response_error), 400)
 			return response 
 		else:		
-			check_password = bcrypt.check_password_hash(result[3], password)
-			if email==result[2] and check_password:
+			check_password = bcrypt.check_password_hash(result["password"], password)
+			if email==result["email"] and check_password:
 				response_ok={
 					"ok": True
 				}
 				token = jwt.encode(
 					{
-						"id":result[0],
-						"name":result[1], 
-						"email":result[2]
+						"id":result["id"],
+						"name":result["name"], 
+						"email":result["email"]
 					},
 					"jwt_secret", algorithm="HS256")
 				response = make_response(jsonify(response_ok), 200)

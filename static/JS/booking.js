@@ -1,7 +1,7 @@
 const noReservation = document.querySelector(".noReservation")
 const afterfooter = document.querySelector(".afterfooter")
 const showReservation = document.querySelector(".showReservation")
-const usernameText = document.querySelector(".usernameText")
+const headline = document.querySelector(".headline")
 const picture = document.querySelector(".picture")
 const attractionName = document.querySelector(".attractionName")
 const date = document.querySelector(".date")
@@ -12,6 +12,8 @@ const nameInput = document.querySelector(".name")
 const emailInput = document.querySelector(".email")
 const totalPrice = document.querySelector(".totalPrice")
 const deleteIcon = document.querySelector(".deleteIcon")
+let username;
+let useremail;
 
 // Part 5 - 5：get booking information API
 fetch("/api/user/auth").then(function(response){    //method:"GET"
@@ -21,37 +23,38 @@ fetch("/api/user/auth").then(function(response){    //method:"GET"
         location.href="/";
     }
     else{
-        const username = data.data.name;
-        const useremail = data.data.email;
-        fetch("/api/booking").then(function(response){  //method:"GET"
-            return response.json();  
-        }).then(function(data){
-            usernameText.innerHTML = username;
-            if(data.data == null){
-                return;
-            }
-            else{
-                showReservation.style.display="block";
-                noReservation.style.display="none";
-                afterfooter.style.display="none";
-                const img = document.createElement("img");        
-                img.setAttribute("src",data.data.attraction.image);
-                picture.appendChild(img);
-                attractionName.innerHTML = data.data.attraction.name;
-                date.innerHTML = data.data.date;
-                if (data.data.time=="上半天"){
-                    time.innerHTML = "早上9點到下午4點";
-                }else{
-                    time.innerHTML = "下午1點到晚上8點";
-                }
-                price.innerHTML = "新台幣"+data.data.price+"元";
-                address.innerHTML = data.data.attraction.address;
-                nameInput.setAttribute("value", username);
-                emailInput.setAttribute("value", useremail);
-                totalPrice.innerHTML = "新台幣"+data.data.price+"元";                  
-            }           
-        })
+        username = data.data.name;
+        useremail = data.data.email;
+        headline.innerHTML = "您好，"+ username +"，待預定的行程如下："
     }
+})
+
+fetch("/api/booking").then(function(response){  //method:"GET"
+    return response.json();  
+}).then(function(data){
+    if(data.data == null){
+        return;
+    }
+    else{
+        showReservation.style.display="block";
+        noReservation.style.display="none";
+        afterfooter.style.display="none";
+        const img = document.createElement("img");        
+        img.setAttribute("src",data.data.attraction.image);
+        picture.appendChild(img);
+        attractionName.innerHTML = data.data.attraction.name;
+        date.innerHTML = data.data.date;
+        if (data.data.time=="上半天"){
+            time.innerHTML = "早上9點到下午4點";
+        }else{
+            time.innerHTML = "下午1點到晚上8點";
+        }
+        price.innerHTML = "新台幣"+data.data.price+"元";
+        address.innerHTML = data.data.attraction.address;
+        nameInput.setAttribute("value", username);
+        emailInput.setAttribute("value", useremail);
+        totalPrice.innerHTML = "新台幣"+data.data.price+"元";                  
+    }           
 })
 
 // Part 5 - 5：delete booking API

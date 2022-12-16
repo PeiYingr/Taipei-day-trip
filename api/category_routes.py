@@ -1,19 +1,7 @@
 from flask import Blueprint, make_response, jsonify
-import mysql.connector
+from api.connection import connection_pool
 
 categories = Blueprint("categories", __name__)
-taipei_attractions = {
-    "user":"root",
-    "password":"hihi3838",
-    "host":"127.0.0.1",
-    "database":"taipei_attractions",
-}
-# create connection pool
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(
-    pool_name = "taipei_attractions",
-    pool_size = 10,
-    **taipei_attractions
-)
 
 # 取得景點分類名稱列表
 @categories.route("/api/categories")

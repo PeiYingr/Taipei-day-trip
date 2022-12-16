@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-import mysql.connector
 from api.attraction_routes import attractions
 from api.category_routes import categories
 from api.user_routes import users
@@ -16,19 +15,6 @@ app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 # 防止Flask jsonify對數據進行排序
 app.config["JSON_SORT_KEYS"]=False
-
-taipei_attractions = {
-    "user":"root",
-    "password":"hihi3838",
-    "host":"127.0.0.1",
-    "database":"taipei_attractions",
-}
-# create connection pool
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(
-    pool_name = "taipei_attractions",
-    pool_size = 10,
-    **taipei_attractions
-)
 
 # Pages
 @app.route("/")
