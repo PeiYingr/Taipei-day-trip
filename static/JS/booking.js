@@ -12,6 +12,8 @@ const nameInput = document.querySelector(".name")
 const emailInput = document.querySelector(".email")
 const totalPrice = document.querySelector(".totalPrice")
 const deleteIcon = document.querySelector(".deleteIcon")
+let username;
+let useremail;
 
 // Part 5 - 5：get booking information API
 fetch("/api/user/auth").then(function(response){    //method:"GET"
@@ -21,8 +23,8 @@ fetch("/api/user/auth").then(function(response){    //method:"GET"
         location.href="/";
     }
     else{
-        const username = data.data.name;
-        const useremail = data.data.email;
+        username = data.data.name;
+        useremail = data.data.email;
         usernameText.innerHTML = username;
     }
 })
