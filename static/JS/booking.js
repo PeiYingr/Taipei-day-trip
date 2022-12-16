@@ -25,7 +25,7 @@ fetch("/api/user/auth").then(function(response){    //method:"GET"
     else{
         username = data.data.name;
         useremail = data.data.email;
-        usernameText.innerHTML = username;
+        usernameText.textContent = username;
     }
 })
 
