@@ -1,7 +1,7 @@
 from flask import Blueprint, request, make_response, jsonify
 import jwt, datetime, re
 from flask_bcrypt import Bcrypt
-from api.connection import connection_pool
+from model.user import User
 
 users = Blueprint("users",__name__)
 key = "jwt_secret"
@@ -16,11 +16,7 @@ def signup():
 		email=front_request["email"]
 		password=front_request["password"]
 		pw_hash = bcrypt.generate_password_hash(password)
-		connection_object = connection_pool.get_connection()
-		cursor =  connection_object.cursor()
-		query=("SELECT email FROM user WHERE email=%s")
-		cursor.execute(query, (email,))
-		result = cursor.fetchone()
+		result = User.check_signup_information(email)
 		if result:
 			response_error={
 				"error": True,
@@ -34,10 +30,7 @@ def signup():
 			email_result= re.fullmatch(email_regex, email)
 			password_result = re.fullmatch(password_regex, password)
 			if email_result and password_result :
-				add_member="INSERT INTO user(name, email, password) VALUES (%s, %s, %s)"
-				newdata=(name, email, pw_hash)
-				cursor.execute(add_member, newdata)
-				connection_object.commit()
+				User.sign_up(name, email, pw_hash)
 				response_ok={
 					"ok": True
 				}
@@ -57,9 +50,6 @@ def signup():
 		}
 		response = make_response(jsonify(response_error), 500)
 		return response
-	finally:
-		cursor.close()
-		connection_object.close()
 
 
 # signin 
@@ -69,11 +59,7 @@ def signin():
 		front_request=request.get_json()
 		email=front_request["email"]
 		password=front_request["password"]
-		connection_object = connection_pool.get_connection()
-		cursor =  connection_object.cursor(dictionary=True)
-		query=("SELECT id, name, email, password FROM user WHERE email=%s")
-		cursor.execute(query, (email,))
-		result = cursor.fetchone()
+		result = User.sign_in(email)
 		if result==None:
 			response_error={
 				"error": True,
@@ -111,9 +97,6 @@ def signin():
 		}
 		response = make_response(jsonify(response_error), 500)
 		return response
-	finally:
-		cursor.close()
-		connection_object.close()
 
 # get signin status/information
 @users.route("/api/user/auth", methods=["GET"])
