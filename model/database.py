@@ -18,7 +18,3 @@ connection_pool = mysql.connector.pooling.MySQLConnectionPool(
     pool_size = 10,
     **taipei_attractions
 )
-
-def database_connect():
-    connection_object = connection_pool.get_connection()
-    return connection_object

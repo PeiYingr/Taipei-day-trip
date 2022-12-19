@@ -1,10 +1,10 @@
-import model.database
+from model.database import connection_pool
 
 class Booking:
     def get_booking_information(user_id):
         try:
-            connection_object = model.database.database_connect()
-            cursor =  connection_object.cursor(dictionary=True)
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor(dictionary=True)
             get_booking = """
             SELECT 
                 attractions.id, attractions.name, 
@@ -22,8 +22,8 @@ class Booking:
 
     def user_booking_information(user_id):
         try:
-            connection_object = model.database.database_connect()
-            cursor =  connection_object.cursor(dictionary=True)
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor(dictionary=True)
             find_booking = "SELECT user_id FROM booking WHERE user_id=%s"
             cursor.execute(find_booking, (user_id,))    
             result=cursor.fetchone()
@@ -34,8 +34,8 @@ class Booking:
 
     def create_new_booking(user_id, attraction_id, date, time, price):
         try:
-            connection_object = model.database.database_connect()
-            cursor =  connection_object.cursor(dictionary=True)
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor(dictionary=True)
             new_booking = "INSERT INTO booking(user_id, attraction_id, date, time, price) VALUES (%s, %s, %s, %s, %s)"
             newdata = (user_id, attraction_id, date, time, price)
             cursor.execute(new_booking, newdata)
@@ -46,8 +46,8 @@ class Booking:
 
     def delete_booking(user_id):
         try:
-            connection_object = model.database.database_connect()
-            cursor =  connection_object.cursor(dictionary=True)
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor(dictionary=True)
             delete_booking = "DELETE FROM booking WHERE user_id=%s;"
             cursor.execute(delete_booking, (user_id,))
             connection_object.commit()

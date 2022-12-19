@@ -1,10 +1,10 @@
-import model.database
+from model.database import connection_pool
 
 class User:
     def check_signup_information(email):
         try:
-            connection_object = model.database.database_connect()
-            cursor =  connection_object.cursor()
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor()
             query=("SELECT email FROM user WHERE email=%s")
             cursor.execute(query, (email,))
             result = cursor.fetchone()
@@ -15,8 +15,8 @@ class User:
 
     def sign_up(name, email, pw_hash):
         try:
-            connection_object = model.database.database_connect()
-            cursor =  connection_object.cursor()
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor()
             add_member="INSERT INTO user(name, email, password) VALUES (%s, %s, %s)"
             newdata=(name, email, pw_hash)
             cursor.execute(add_member, newdata)
@@ -27,8 +27,8 @@ class User:
     
     def sign_in(email):
         try:
-            connection_object = model.database.database_connect()
-            cursor =  connection_object.cursor(dictionary=True)
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor(dictionary=True)
             query=("SELECT id, name, email, password FROM user WHERE email=%s")
             cursor.execute(query, (email,))
             result = cursor.fetchone()

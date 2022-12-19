@@ -1,10 +1,10 @@
-import model.database
+from model.database import connection_pool
 
 class Category:
     def category_search():
         try:
-            connection_object = model.database.database_connect()
-            cursor =  connection_object.cursor()
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor()
             # 使用 DISTINCT 過濾掉重複的資料
             category_search="SELECT DISTINCT category FROM attractions"
             cursor.execute(category_search)
