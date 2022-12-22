@@ -41,7 +41,7 @@ def signup():
 					"error": True,
 					"message": "Email 或 密碼格式錯誤"
 				}
-				response = make_response(jsonify(response_error), 500)
+				response = make_response(jsonify(response_error), 400)
 				return response
 	except:
 		response_error={
@@ -50,7 +50,6 @@ def signup():
 		}
 		response = make_response(jsonify(response_error), 500)
 		return response
-
 
 # signin 
 @users.route("/api/user/auth", methods=["PUT"])
@@ -120,7 +119,6 @@ def get_signin():
 		}
 	response = make_response(jsonify(response_end), 200)
 	return response 
-
 
 # signout
 @users.route("/api/user/auth", methods=["DELETE"])
