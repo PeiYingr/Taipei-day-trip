@@ -47,8 +47,8 @@ class Booking:
     def delete_booking(user_id):
         try:
             connection_object = connection_pool.get_connection()
-            cursor = connection_object.cursor(dictionary=True)
-            delete_booking = "DELETE FROM booking WHERE user_id=%s;"
+            cursor = connection_object.cursor()
+            delete_booking = "DELETE FROM booking WHERE user_id = %s;"
             cursor.execute(delete_booking, (user_id,))
             connection_object.commit()
         finally:
