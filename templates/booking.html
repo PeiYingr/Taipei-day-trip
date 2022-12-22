@@ -3,7 +3,7 @@
 <html>
     <head>
         {% block head %}
-        <title>台北一日遊-預定行程</title>
+        <title>♢ 台北一日遊-預定行程 ♢</title>
         <link rel="stylesheet" type="text/css" href="/CSS/booking.css">
         {% endblock head %}
     </head>
@@ -34,9 +34,24 @@
             <hr class="hr">
             <div class="payForm">
                 <div class="payInformation">您的聯絡資訊</div>
-                <div class="cardText">卡片號碼：<input type="text" class="cardnumber" placeholder="**** **** ****" autocomplete="off"/></div>
+                <div class="cardBlock">
+                    <div class="cardText">卡片號碼：</div>
+                    <div class="tpfield" id="card-number"></div>
+                    <div class="cardResult"></div>
+                </div>
+                <div class="cardBlock">
+                    <div class="expirationDateText">過期時間：</div>
+                    <div class="tpfield" id="card-expiration-date"></div>
+                    <div class="expiryResult"></div>       
+                </div>
+                <div class="cardBlock">
+                    <div class="cvvText">驗證密碼：</div>
+                    <div class="tpfield" id="card-ccv"></div>
+                    <div class="cvvResult"></div>
+                </div>
+                <!-- <div class="cardText">卡片號碼：<input type="text" class="cardnumber" placeholder="**** **** ****" autocomplete="off"/></div>
                 <div class="expirationDateText">過期時間：<input type="text" class="expirationDate" placeholder="MM / YY" autocomplete="off"/></div>
-                <div class="cvvText">驗證密碼：<input type="text" class="cvv" placeholder="CVV" autocomplete="off"/></div>
+                <div class="cvvText">驗證密碼：<input type="text" class="cvv" placeholder="CVV" autocomplete="off"/></div> -->
             </div>
             <hr class="hr">
             <div class="confirm">
@@ -49,6 +64,7 @@
         <div class="afterfooter"></div>
         {% endblock afterFooter %} 
         {% block script %}
+        <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
         <script src="/JS/booking.js"></script>
         {% endblock script %} 
     </body>
