@@ -31,9 +31,8 @@ fetch("/api/order/" + orderNumber).then(function(response){
     return response.json();
 }).then(function(data){
     if (data.data == null){
-        return;
+        noOrder.style.display="block";
     }else{
-        noOrder.style.display="none";
         order.style.display="block";
         number.textContent = orderNumber;
         attractionName.textContent = data.data.trip.attraction.name;

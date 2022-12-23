@@ -15,7 +15,8 @@
     width: 1000px;
     height: 600px;
     position: relative; 
-    margin: 0px auto;  
+    margin: 0px auto;
+    display: none;   
 }
 .noOrderText{
     width: auto;
