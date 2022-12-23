@@ -37,7 +37,7 @@
     width: 450px;
     height: 450px;
     position: absolute;
-    right:0px;
+    right:100px;
     bottom:100px;
 }
 .picture img{
@@ -107,7 +107,7 @@ li{
 }
 @media (max-width:1200px){
     .headline, .order, .noOrder, .successOrder{
-        width:95%;
+        width:90%;
     }
 }
 @media (max-width:900px){
@@ -116,10 +116,24 @@ li{
         height:50%;
         margin:0px auto;
     }
+    .picture{
+    width:350px;
+    height:350px;
+    right:50px;
+}
 }
 @media (max-width:700px){
     .attractionPicture{
         display: none;
+    }
+    .picture{
+        width:300px;
+        height:300px;
+        right:0px;
+        bottom:0px;
+    }
+    .noOrder{
+        height:475px;
     }
 }
 @media (max-width:400px){
