@@ -102,7 +102,13 @@
     color: #666666;
     margin-bottom: 20px;
 }
-.nameText, .emailText, .phoneText, .cardText, .expirationDateText ,.cvvText{
+.cardBlock{
+    width: 100%;
+    height: 38px;
+    display: flex; 
+    margin-bottom: 15px;   
+}
+.nameText, .emailText, .phoneText{
     width: 100%;
     height: 38px;
     font-weight: 700;
@@ -111,8 +117,8 @@
     color: #666666;
     margin-bottom: 15px;
 }
-.name, .email, .phone, .cardnumber, .expirationDate, .cvv{
-    width: 250px;
+.name, .email, .phone{
+    width: 230px;
     height: 38px;
     border: 1px solid #E8E8E8;
     border-radius: 5px;
@@ -122,6 +128,35 @@
     font-size: 16px;
     line-height: 18px;
     color: #000000;
+}
+.cardText, .expirationDateText ,.cvvText{
+    width: 80px;
+    height: 38px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 38px;
+    color: #666666;
+}
+.tpfield {
+    width: 230px;
+    height: 38px;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    color: #000000;
+}
+/* Bootstrap 的 focus style */
+.tappay-field-focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.cardResult, .expiryResult ,.cvvResult{
+    font-size: 14px;
+    line-height: 38px;
+    margin-left: 10px;
 }
 .notice{
     height: 24px;
@@ -174,7 +209,6 @@
         width:50%;
     }
 }
-
 @media (max-width:650px){
     .reserveSection{
         display:inline-block;

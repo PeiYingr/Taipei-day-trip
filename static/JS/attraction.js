@@ -92,6 +92,8 @@ function showSlides(y){
     dot[slideIndex-1].style.backgroundColor ="#000000" 
 }
 
+const today = new Date()
+const tomorrow = String(today.getFullYear())+String((today.getMonth()+1))+String((today.getDate()+1))
 // Part 5 - 4：Create new booking
 const startReserveButton = document.querySelector(".startReserveButton");
 const noticeMain= document.querySelector(".noticeMain")
@@ -112,29 +114,35 @@ startReserveButton.addEventListener("click",function(){
                 noticeWindow.style.display="block";
                 noticeMain.innerText="未選擇日期或時間"; 
             }else{
-                const booking = { 
-                    "attractionId":attractionId,
-                    "date":date,
-                    "time":time.value,
-                    "price":price
-                }; 
-                fetch("/api/booking",{
-                    method:"POST",
-                    body:JSON.stringify(booking),
-                    cache:"no-cache",
-                    headers:new Headers({
-                        "content-type":"application/json"
-                    })
-                }).then(function(response){    
-                    return response.json();
-                }).then(function(data){
-                    if(data.ok == true){
-                        location.href="/booking";
-                    }else{
-                        noticeWindow.style.display="block";
-                        noticeMain.innerText=data.message; 
-                    }
-                })
+                const dateChoose = date.split("-")[0]+date.split("-")[1]+date.split("-")[2];            
+                if(dateChoose < tomorrow){
+                    noticeWindow.style.display="block";
+                    noticeMain.innerText="請選擇今日之後的日期";                     
+                }else{
+                    const booking = { 
+                        "attractionId":attractionId,
+                        "date":date,
+                        "time":time.value,
+                        "price":price
+                    }; 
+                    fetch("/api/booking",{
+                        method:"POST",
+                        body:JSON.stringify(booking),
+                        cache:"no-cache",
+                        headers:new Headers({
+                            "content-type":"application/json"
+                        })
+                    }).then(function(response){    
+                        return response.json();
+                    }).then(function(data){
+                        if(data.ok == true){
+                            location.href="/booking";
+                        }else{
+                            noticeWindow.style.display="block";
+                            noticeMain.innerText=data.message; 
+                        }
+                    })                    
+                }
             }
         }
     })

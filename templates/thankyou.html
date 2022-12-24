@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+<html>
+    <head>
+        {% block head %}
+        <title>♡ 台北一日遊 ♡</title>
+        <link rel="stylesheet" type="text/css" href="/CSS/thankyou.css">
+        {% endblock head %}
+    </head>
+    <body>
+        {% block content %}
+        <div class="headline"></div>
+        <div class="noOrder">
+            <a href="/"><div class="picture"><img src="/Images/taiwan.jpg"/></div></a>  
+            <div class="noOrderText">無此訂單紀錄，歡迎預訂行程</div>
+            <a href="/" style="text-decoration:none";><div class="noOrderText"><span class="seeAttraction">🢡 點此瀏覽景點列表 🢢</span></div></a> 
+        </div>  
+        <div class="order">
+            <div class="attractionPicture"></div>
+            <div class="successOrder">✿ 訂單資訊</div>
+            <ul>
+                <li>訂單編號：<span class="number"></span></li>
+                <li>景點名稱：<span class="attractionName"></span></li>
+                <li>景點地址：<span class="attractionAddress"></span></li>
+                <li>行程日期及時間：<span class="dateTime"></span></li>
+                <li>價錢：<span class="price"></span></li>
+                <li>付款狀態：<span class="payStatus"></span></li>
+            </ul>
+            <div style="height:20px"></div>
+            <div class="successOrder">✿ 聯絡人資訊</div>
+            <ul>
+                <li>姓名：<span class="contactName"></span></li>
+                <li>信箱：<span class="contactMail"></span></li>
+                <li>手機：<span class="contactPhone"></span></li>
+            </ul>
+            <div class="note">✐ 請記住此編號，或到會員中心查詢歷史訂單</div>
+        </div>
+        {% endblock content %} 
+        {% block afterFooter %}
+        <div class="afterfooter"></div>
+        {% endblock afterFooter %} 
+        {% block script %}
+        <script src="/JS/thankyou.js"></script>
+        {% endblock script %} 
+    </body>
+</html>

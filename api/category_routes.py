@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, jsonify
-from api.connection import connection_pool
+from model.category import Category
 
 categories = Blueprint("categories", __name__)
 
@@ -7,16 +7,9 @@ categories = Blueprint("categories", __name__)
 @categories.route("/api/categories")
 def api_categories():
 	try:
-		connection_object = connection_pool.get_connection()
-		cursor =  connection_object.cursor()
-		# 使用 DISTINCT 過濾掉重複的資料
-		category_search="SELECT DISTINCT category FROM attractions"
-		cursor.execute(category_search)
-		result_category = cursor.fetchall()
-		# set(result_category) 
-		# 若資料庫過濾重複資料無使用 DISTINCT，也可使用 set 集合來過濾掉重複的資料
+		result = Category.category_search()
 		catlist=[]
-		for x in result_category:
+		for x in result:
 			catlist.append(x[0])
 
 		response_json={
@@ -31,6 +24,3 @@ def api_categories():
 		}
 		response=make_response(jsonify(response_error), 500)
 		return response
-	finally:
-		cursor.close()
-		connection_object.close()

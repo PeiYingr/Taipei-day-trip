@@ -3,6 +3,7 @@ from api.attraction_routes import attractions
 from api.category_routes import categories
 from api.user_routes import users
 from api.booking_routes import bookings
+from api.order_routes import orders
 
 app=Flask(__name__,static_folder="static", static_url_path="/")
 
@@ -10,6 +11,7 @@ app.register_blueprint(attractions)
 app.register_blueprint(categories)
 app.register_blueprint(users)
 app.register_blueprint(bookings)
+app.register_blueprint(orders)
 
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True

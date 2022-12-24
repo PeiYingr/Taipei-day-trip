@@ -1,6 +1,6 @@
 from flask import Blueprint, request, make_response, jsonify
 import jwt
-from api.connection import connection_pool
+from model.booking import Booking
 
 bookings = Blueprint("bookings",__name__)
 
@@ -17,18 +17,7 @@ def get_booking():
                 algorithms=["HS256"]
             )
             user_id = user_token["id"]
-            connection_object = connection_pool.get_connection()
-            cursor =  connection_object.cursor(dictionary=True)
-            get_booking = """
-            SELECT 
-                attractions.id, attractions.name, 
-                attractions.address, attractions.images, 
-                booking.date, booking.time, booking.price 
-            FROM attractions INNER JOIN booking ON attractions.id=booking.attraction_id 
-            WHERE booking.user_id=%s
-            """
-            cursor.execute(get_booking,(user_id,))
-            result=cursor.fetchone()
+            result = Booking.get_booking_information(user_id)
             if result:
                 image = result["images"].split(",")
                 response_end={
@@ -50,16 +39,13 @@ def get_booking():
                 }
             response = make_response(jsonify(response_end), 200)
             return response 
-        else:
-            response_error={
-                "error": True,
-                "message": "未登入系統，拒絕存取"
-            }
-            response = make_response(jsonify(response_error), 403)
-            return response 
-    finally:
-        cursor.close()
-        connection_object.close()
+    except:
+        response_error={
+            "error": True,
+            "message": "未登入系統，拒絕存取"
+        }
+        response = make_response(jsonify(response_error), 403)
+        return response 
 
 # create new booking
 @bookings.route("/api/booking", methods=["POST"])
@@ -72,26 +58,17 @@ def new_booking():
                 "jwt_secret", 
                 algorithms=["HS256"]
             )
-            user_id = user_token["id"]
-            connection_object = connection_pool.get_connection()
-            cursor =  connection_object.cursor()
-            find_booking = "SELECT user_id FROM booking WHERE user_id=%s"
-            cursor.execute(find_booking, (user_id,))    
-            result=cursor.fetchone()
+            user_id = user_token["id"]    
+            result = Booking.user_booking_information(user_id)
             if result:
-                delete_booking = "DELETE FROM booking WHERE user_id=%s;"
-                cursor.execute(delete_booking, (user_id,))
-                connection_object.commit()     
+                Booking.delete_booking(user_id)
             front_request = request.get_json()
             attraction_id = front_request["attractionId"]
             date = front_request["date"]
             time = front_request["time"]
             price = front_request["price"]
             if date and time:
-                new_booking = "INSERT INTO booking(user_id, attraction_id, date, time, price) VALUES (%s, %s, %s, %s, %s)"
-                newdata = (user_id, attraction_id, date, time, price)
-                cursor.execute(new_booking, newdata)
-                connection_object.commit()
+                Booking.create_new_booking(user_id, attraction_id, date, time, price)
                 response_ok={
                     "ok": True
                 }
@@ -118,9 +95,6 @@ def new_booking():
         }
         response = make_response(jsonify(response_error), 500)
         return response
-    finally:
-        cursor.close()
-        connection_object.close()
 
 # delete booking
 @bookings.route("/api/booking", methods=["DELETE"])
@@ -134,23 +108,16 @@ def delete_booking():
                 algorithms=["HS256"]
             )
             user_id = user_token["id"]
-            connection_object = connection_pool.get_connection()
-            cursor =  connection_object.cursor()
-            delete_booking = "DELETE FROM booking WHERE user_id=%s;"
-            cursor.execute(delete_booking, (user_id,))
-            connection_object.commit()
+            Booking.delete_booking(user_id)
             response_ok={
                 "ok": True
             }
             response = make_response(jsonify(response_ok), 200)
             return response 
-        else:
-            response_error={
-                "error": True,
-                "message": "未登入系統，拒絕存取"
-            }
-            response = make_response(jsonify(response_error), 403)
-            return response
-    finally:
-        cursor.close()
-        connection_object.close()
+    except:
+        response_error={
+            "error": True,
+            "message": "未登入系統，拒絕存取"
+        }
+        response = make_response(jsonify(response_error), 403)
+        return response
