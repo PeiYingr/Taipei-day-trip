@@ -85,9 +85,8 @@ const signinMain=document.querySelector(".signinMain")
 const signinResult=document.createElement("div");
 signinResult.setAttribute("class","signinResult");
 signinButton.addEventListener("click",function(){
-    const signinEmail = document.querySelector(".signinEmail").value;
-    const signinPassword = document.querySelector(".signinPassword").value;
-    if(signinEmail ==""|| signinPassword==""){
+
+    if(signinEmail == ""|| signinPassword == ""){
         signinResult.setAttribute("style","color:#8B0000");        
         signinResult.innerHTML="未輸入Email或密碼"; 
         const changeToSignup=document.querySelector(".changeToSignup");
