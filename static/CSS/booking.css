@@ -199,7 +199,6 @@
 .bookingButton:hover{
     font-weight: bold;
     cursor: pointer;
-    border-radius:5px;
 }
 @media (max-width:1200px){
     .hr,.headline,.noReservation,.reserveSection,.contactForm, .payForm,.confirm{

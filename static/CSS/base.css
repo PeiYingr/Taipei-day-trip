@@ -201,7 +201,9 @@ body{
 .signinButton:hover, .signupButton:hover,.changeToSignup:hover, .changeToSignin:hover{
     font-weight: bold;
     cursor: pointer;
-    border-radius:5px;
+}
+.changeToSignup:hover, .changeToSignin:hover{
+    text-decoration: underline;
 }
 .footer{
     display:flex;
