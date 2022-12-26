@@ -26,7 +26,7 @@ def create_order():
             name =  order_front_request["order"]["contact"]["name"]
             email = order_front_request["order"]["contact"]["email"]
             phone = order_front_request["order"]["contact"]["phone"]                
-            email_regex = re.compile("[^@]+@[^@]+\.[^@]+")
+            email_regex = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-.]+){1,}$')
             phone_regex = re.compile(r'^09\d{8}$')
             email_result= re.fullmatch(email_regex, email)
             phone_result = re.fullmatch(phone_regex, phone)

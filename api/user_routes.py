@@ -12,37 +12,46 @@ bcrypt=Bcrypt()
 def signup():
 	try:
 		front_request=request.get_json()
+		()
 		name=front_request["name"]
 		email=front_request["email"]
 		password=front_request["password"]
-		pw_hash = bcrypt.generate_password_hash(password)
-		result = User.check_signup_information(email)
-		if result:
+		if name =="" or email =="" or password=="":
 			response_error={
 				"error": True,
-				"message": "註冊失敗，此 Email 已註冊過"
+				"message": "未輸入姓名、Email或密碼"
 			}
 			response = make_response(jsonify(response_error), 400)
-			return response 
-		else:
-			email_regex = re.compile("[^@]+@[^@]+\.[^@]+")
-			password_regex = re.compile("^(?=.*\d)(?=.*[a-zA-Z]).{4,8}$")
-			email_result= re.fullmatch(email_regex, email)
-			password_result = re.fullmatch(password_regex, password)
-			if email_result and password_result :
-				User.sign_up(name, email, pw_hash)
-				response_ok={
-					"ok": True
-				}
-				response = make_response(jsonify(response_ok), 200)
-				return response 
-			else:
+			return response
+		else:		
+			pw_hash = bcrypt.generate_password_hash(password)
+			result = User.check_signup_information(email)
+			if result:
 				response_error={
 					"error": True,
-					"message": "Email 或 密碼格式錯誤"
+					"message": "註冊失敗，此 Email 已註冊過"
 				}
 				response = make_response(jsonify(response_error), 400)
-				return response
+				return response 
+			else:
+				email_regex = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-.]+){1,}$')
+				password_regex = re.compile(r'^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{4,8}$')
+				email_result= re.fullmatch(email_regex, email)
+				password_result = re.fullmatch(password_regex, password)
+				if email_result and password_result :
+					User.sign_up(name, email, pw_hash)
+					response_ok={
+						"ok": True
+					}
+					response = make_response(jsonify(response_ok), 200)
+					return response 
+				else:
+					response_error={
+						"error": True,
+						"message": "Email或密碼格式錯誤"
+					}
+					response = make_response(jsonify(response_error), 400)
+					return response
 	except:
 		response_error={
 			"error": True,
@@ -55,11 +64,11 @@ def signup():
 @users.route("/api/user/auth", methods=["PUT"])
 def signin():
 	try:
-		front_request=request.get_json()
-		email=front_request["email"]
-		password=front_request["password"]
+		front_request = request.get_json()
+		email = front_request["email"]
+		password = front_request["password"]
 		result = User.sign_in(email)
-		if result==None:
+		if result == None:
 			response_error={
 				"error": True,
 				"message": "電子郵件或密碼輸入錯誤"
