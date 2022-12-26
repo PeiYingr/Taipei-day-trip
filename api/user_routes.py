@@ -16,7 +16,7 @@ def signup():
 		name=front_request["name"]
 		email=front_request["email"]
 		password=front_request["password"]
-		if name =="" or email =="" or password=="":
+		if name == "" or email == "" or password == "":
 			response_error={
 				"error": True,
 				"message": "未輸入姓名、Email或密碼"
@@ -67,6 +67,13 @@ def signin():
 		front_request = request.get_json()
 		email = front_request["email"]
 		password = front_request["password"]
+		if email == "" or password == "":
+			response_error={
+				"error": True,
+				"message": "未輸入Email或密碼"
+			}
+			response = make_response(jsonify(response_error), 400)
+			return response
 		result = User.sign_in(email)
 		if result == None:
 			response_error={
