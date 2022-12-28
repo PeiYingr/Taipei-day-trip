@@ -25,7 +25,14 @@ def create_order():
             order_front_request=request.get_json()
             name =  order_front_request["order"]["contact"]["name"]
             email = order_front_request["order"]["contact"]["email"]
-            phone = order_front_request["order"]["contact"]["phone"]                
+            phone = order_front_request["order"]["contact"]["phone"]
+            if name == "" or email =="" or phone == "":
+                response_error={
+                    "error": True,
+                    "message": "聯絡資訊填寫不完全"
+                }
+                response = make_response(jsonify(response_error), 400)
+                return response                 
             email_regex = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-.]+){1,}$')
             phone_regex = re.compile(r'^09\d{8}$')
             email_result= re.fullmatch(email_regex, email)

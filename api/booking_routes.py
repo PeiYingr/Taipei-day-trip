@@ -1,6 +1,7 @@
 from flask import Blueprint, request, make_response, jsonify
-import jwt
+import jwt, datetime
 from model.booking import Booking
+today=datetime.datetime.now()
 
 bookings = Blueprint("bookings",__name__)
 
@@ -68,12 +69,23 @@ def new_booking():
             time = front_request["time"]
             price = front_request["price"]
             if date and time:
-                Booking.create_new_booking(user_id, attraction_id, date, time, price)
-                response_ok={
-                    "ok": True
-                }
-                response = make_response(jsonify(response_ok), 200)
-                return response 
+                today = str(datetime.datetime.now().date()).split("-")
+                today = today[0]+today[1]+today[2]
+                date_choose = date.split("-")[0]+date.split("-")[1]+date.split("-")[2]
+                if date_choose > today:
+                    Booking.create_new_booking(user_id, attraction_id, date, time, price)
+                    response_ok={
+                        "ok": True
+                    }
+                    response = make_response(jsonify(response_ok), 200)
+                    return response
+                else:
+                    response_error={
+                        "error": True,
+                        "message": "請選擇今天之後的日期"
+                    }
+                    response = make_response(jsonify(response_error), 400)
+                    return response                     
             else:
                 response_error={
                     "error": True,
