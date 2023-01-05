@@ -102,7 +102,6 @@ def create_order():
             response = make_response(jsonify(response_error), 403)
             return response 
     except Exception as e:
-        print(e)
         response_error={
             "error": True,
             "message": "伺服器內部錯誤"
@@ -133,9 +132,9 @@ def get_order(orderNumber):
                             "time": result["time"]
                         },
                         "contact": {
-                        "name": result["contact_name"],
-                        "email": result["email"],
-                        "phone": result["phone"]
+                            "name": result["contact_name"],
+                            "email": result["email"],
+                            "phone": result["phone"]
                         },
                         "status": result["pay_status"]
                     }
@@ -152,6 +151,80 @@ def get_order(orderNumber):
             response = make_response(jsonify(response_error), 403)
             return response 
     except Exception:
+        response_error={
+            "error": True,
+            "message": "伺服器內部錯誤"
+        }
+        response = make_response(jsonify(response_error), 500)
+        return response
+
+@orders.route("/api/order", methods=["GET"])
+def get_orders():
+    try:
+        front_token = request.cookies.get("token")
+        if front_token:
+            user_token=jwt.decode(
+                front_token, 
+                "jwt_secret", 
+                algorithms=["HS256"]
+            )
+            user_id = user_token["id"]
+            front_status = request.args.get("status","")
+            if front_status == "nopay":
+                result = Order.get_nopay_order(user_id)
+            elif front_status == "pay":
+                result = Order.get_pay_orders(user_id)
+            elif front_status == "historyTrip":
+                result = Order.get_pay_orders(user_id)
+                if result:
+                    finish_result=[]
+                    for x in result:
+                        trip_date = x["date"].split("-")[0]+x["date"].split("-")[1]+x["date"].split("-")[2]
+                        today = datetime.now().date()
+                        today_date = today.strftime("%Y%m%d")
+                        if trip_date < today_date:
+                            finish_result = finish_result+[x]
+                    result = finish_result
+            else:
+                result = Order.get_nopay_order(user_id)                
+            if result:
+                response_all = []
+                for x in result:
+                    image = x["images"].split(",")
+                    response_one = {
+                            "number": x["order_number"],
+                            "price": x["price"],
+                            "trip": {
+                                "attraction": {
+                                    "id": x["id"],
+                                    "name": x["name"],
+                                    "address": x["address"],
+                                    "image": image[0]
+                                },
+                                "date": x["date"],
+                                "time": x["time"]
+                            },
+                            "contact": {
+                                "name": x["contact_name"],
+                                "email": x["email"],
+                                "phone": x["phone"]
+                            },
+                            "status": x["pay_status"]
+                    }
+                    response_all.append(response_one)
+                    response = {"data": response_all}
+            else:
+                response = {"data": None}
+            response = make_response(jsonify(response), 200)
+            return response 
+        else:
+            response_error={
+                "error": True,
+                "message": "未登入系統，拒絕存取"
+            }
+            response = make_response(jsonify(response_error), 403)
+            return response 
+    except Exception as e:
         response_error={
             "error": True,
             "message": "伺服器內部錯誤"
