@@ -19,7 +19,7 @@ def signup():
 		if name == "" or email == "" or password == "":
 			response_error={
 				"error": True,
-				"message": "未輸入姓名、Email或密碼"
+				"message": "⚠️ 未輸入姓名、Email或密碼"
 			}
 			response = make_response(jsonify(response_error), 400)
 			return response
@@ -29,7 +29,7 @@ def signup():
 			if result:
 				response_error={
 					"error": True,
-					"message": "註冊失敗，此 Email 已註冊過"
+					"message": "⚠️ 註冊失敗，此 Email 已註冊過"
 				}
 				response = make_response(jsonify(response_error), 400)
 				return response 
@@ -48,7 +48,7 @@ def signup():
 				else:
 					response_error={
 						"error": True,
-						"message": "Email或密碼格式錯誤"
+						"message": "⚠️ Email或密碼格式錯誤"
 					}
 					response = make_response(jsonify(response_error), 400)
 					return response
@@ -70,7 +70,7 @@ def signin():
 		if email == "" or password == "":
 			response_error={
 				"error": True,
-				"message": "未輸入Email或密碼"
+				"message": "⚠️ 未輸入Email或密碼"
 			}
 			response = make_response(jsonify(response_error), 400)
 			return response
@@ -78,7 +78,7 @@ def signin():
 		if result == None:
 			response_error={
 				"error": True,
-				"message": "電子郵件或密碼輸入錯誤"
+				"message": "⚠️ 電子郵件或密碼輸入錯誤"
 			}
 			response = make_response(jsonify(response_error), 400)
 			return response 
@@ -101,7 +101,7 @@ def signin():
 				return response 
 		response_error={
 			"error": True,
-			"message": "電子郵件或密碼輸入錯誤"
+			"message": "⚠️ 電子郵件或密碼輸入錯誤"
 		}
 		response = make_response(jsonify(response_error), 400)
 		return response 
