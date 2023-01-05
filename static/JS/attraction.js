@@ -93,8 +93,18 @@ function showSlides(y){
 }
 // restrict user for selecting date after today
 const today = new Date();
-const dateInput = document.querySelector('input[type="date"]')
-const tomorrow = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+(today.getDate()+1);
+const dateInput = document.querySelector('input[type="date"]');
+let todayYear = String(today.getFullYear());
+let todayMonth = String(today.getMonth()+1);
+let todayDate = String(today.getDate()+1);
+let tomorrow;
+if (todayMonth < 10){
+    todayMonth = "0" + todayMonth;
+}
+if (todayDate < 10){
+    todayDate = "0" + todayDate;
+}
+tomorrow = todayYear + "-" + todayMonth + "-" + todayDate;
 dateInput.setAttribute("min", tomorrow)
 // Part 5 - 4：Create new booking
 const startReserveButton = document.querySelector(".startReserveButton");
