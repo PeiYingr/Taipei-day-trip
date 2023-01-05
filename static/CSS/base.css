@@ -27,51 +27,71 @@ body{
     line-height:34px;
     margin-top:10px;
     margin-bottom:10px;
-    margin-right:885px;
+    margin-right:auto;
     cursor: pointer;
 }
-.reserve{
+.reserve,.sign,.memberCenter{
     flex:none;
-    width:64px;
-    height:18px;
+    width:100px;
+    height:34px;
     color: #666666;
     font-weight: 500;
     font-size: 16px;
     text-align: center;
-    line-height: 18px;
-    margin-top:20px;
-    margin-bottom:20px;
-    margin-right:20px;
+    line-height: 34px;
+    margin-top:10px;
+    margin-bottom:10px;
+    display: flex;
+    align-items: center;
 }
-.sign{
+.reserve{
+    margin-right:25px;
+}
+.userIcon, .cartIcon{
     flex:none;
-    width: 75px;
-    height: 18px; 
-    color: #666666;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 18px;
-    text-align: center;
-    margin-top:20px;
-    margin-bottom:20px;
+    width: 23px;
+    height: 23px;
+    cursor: pointer;
+    margin-right:7px;
+}
+.userIcon img, .cartIcon img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.sign,.memberCenter{
     margin-right:10px;
 }
-.signoutText{
+.memberCenter{
     display:none;
-    flex:none;
-    width: 75px;
-    height: 18px; 
+}
+.memberCenterFrame{
+    display:none;
+    width:1200px;
+    height:120px;
+    margin:auto;
+    justify-content: end;
+    position: absolute;
+    top: 50px;
+}
+.memberCenterBlock{
+    width:120px;
+    height: 120px;
+    text-align: center;
+    background: #FFFFFF;
+    box-shadow: 10px 10px 20px #AABBCC;
+    border-radius: 5px;
+}
+.memberInfo, .historyOrder,.signoutText{
+    height: 40px; 
     color: #666666;
     font-weight: 500;
     font-size: 16px;
-    line-height: 18px;
-    text-align: center;
-    margin-top:20px;
-    margin-bottom:20px;
-    margin-right:10px; 
+    line-height: 40px;  
 }
-.reserve:hover,.sign:hover, .signoutText:hover{
-    font-weight: bold;
+.reserve:hover,.sign:hover, .memberCenter:hover, .memberInfo:hover, .historyOrder:hover, .signoutText:hover{
+    font-weight:900;
     background-color: antiquewhite;
     cursor: pointer;
     border-radius:5px;
@@ -199,11 +219,14 @@ body{
     color: #666666; 
     padding-bottom: 10px;
 }
-.signinButton:hover, .signupButton:hover,.changeToSignup:hover, .changeToSignin:hover{
+.signinButton:hover, .signupButton:hover{
     font-weight: bold;
     cursor: pointer;
+    background:#699fad;
 }
 .changeToSignup:hover, .changeToSignin:hover{
+    font-weight: bold;
+    cursor: pointer;
     text-decoration: underline;
 }
 .footer{

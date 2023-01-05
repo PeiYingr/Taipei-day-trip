@@ -19,7 +19,15 @@
     height:100%;
     object-fit: cover;
     border-radius: 5px;
+    /* Fading animation */
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
+/* Fading animation */
+  @keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
 /* Next & previous buttons */
 .prev{
     width: 36px;
