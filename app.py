@@ -31,5 +31,8 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
+@app.route("/order")
+def order():
+	return render_template("order.html")	
 
 app.run (host="0.0.0.0", port=3000)
