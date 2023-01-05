@@ -58,3 +58,48 @@ class Order:
         finally:
             cursor.close()
             connection_object.close()
+
+    def get_nopay_order(user_id):
+        # get haven't pay orders
+        try:
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor(dictionary=True)
+            get_history_order = """
+            SELECT
+                orders.order_number, orders.price, orders.date, orders.time,
+                orders.name AS contact_name, orders.email, orders.phone, 
+                orders.pay_status, attractions.id, attractions.name, 
+                attractions.address, attractions.images
+            FROM orders 
+            INNER JOIN attractions ON orders.attraction_id = attractions.id
+            WHERE user_id = %s and pay_status =%s
+            """
+            query = (user_id,"1")
+            cursor.execute(get_history_order,query)
+            result = cursor.fetchall()
+            return result 
+        finally:
+            cursor.close()
+            connection_object.close()
+
+    def get_pay_orders(user_id):
+        try:
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor(dictionary=True)
+            get_pay_orders = """
+            SELECT
+                orders.order_number, orders.price, orders.date, orders.time,
+                orders.name AS contact_name, orders.email, orders.phone, 
+                orders.pay_status, attractions.id, attractions.name, 
+                attractions.address, attractions.images
+            FROM orders 
+            INNER JOIN attractions ON orders.attraction_id = attractions.id
+            WHERE user_id = %s and pay_status=%s
+            """
+            query = (user_id,"0")
+            cursor.execute(get_pay_orders, query)
+            result = cursor.fetchall()
+            return result 
+        finally:
+            cursor.close()
+            connection_object.close()
