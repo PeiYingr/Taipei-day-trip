@@ -85,7 +85,7 @@ function orderHistoryLoad(allData){
     listPrice.appendChild(price)
     // contactInformation Frame
     const contactInformation = document.createElement("div");
-    contactInformation.setAttribute("class","orderInformation");
+    contactInformation.setAttribute("class","contactInformation");
     historyOrders.appendChild(contactInformation);
 
     const contactInformationText = document.createElement("div");
@@ -95,7 +95,7 @@ function orderHistoryLoad(allData){
     // contactList
     const contactList = document.createElement("ul");
     contactInformation.appendChild(contactList)
-        // list-contact name
+    // list-contact name
     const listContactName = document.createElement("li");
     listContactName.textContent = "姓名：";
     contactList.appendChild(listContactName)
