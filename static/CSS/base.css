@@ -251,12 +251,15 @@ body{
     color: #FFFFFF;
 }
 
-@media (max-width:1200px){
+@media (max-width:1230px){
     .frame{
         width:98%;
     }
     .title{
         margin-right:auto;
+    }
+    .memberCenterFrame{
+        width:98%;
     }
 }
 
@@ -270,5 +273,33 @@ body{
     }
     .reserve{
         margin-left: auto;
+    }
+    .memberCenterBlock{
+        width:110px;
+    }
+}
+
+@media (max-width:450px) {
+    .frame{
+        width:100%;
+    }
+    .title{
+        margin-left:10px;
+        margin-right:20px;
+        width:130px;
+        font-size: 26px;
+    }
+    .reserve{
+        width:95px;
+        margin-right: 5px;
+    }
+    .memberCenter{
+        width:95px;
+    }
+    .memberCenterBlock{
+        width:100px;
+    }
+    .userIcon, .cartIcon{
+        margin-right: 3px;
     }
 }
