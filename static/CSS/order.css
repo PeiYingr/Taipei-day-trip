@@ -188,3 +188,54 @@ li{
     margin: auto;  
     border-radius:0px 0px 5px 5px;  
 }
+
+
+@media (max-width:1200px){
+    .headline,.historyOrderType, .nohistoryOrderFrame, .havehistoryOrderFrame, .fixScroll,.historyOrders{
+        width:95%;
+    }
+    .orderNumberText{
+        width:19%;
+    }
+    .historyOrdersPicture{
+        width:25%;
+    }
+    .orderInformation, .contactInformation{
+        width:28%;        
+    }
+    .orderNumberText, .orderInformationText, .contactInformationText{
+        font-size: 16px;
+    }
+}
+@media (max-width:810px){
+    .historyOrdersPicture{
+        display:none;
+    }
+    .orderNumberText{
+        width:30%;
+    }
+    .orderInformation, .contactInformation{
+        width:35%;        
+    }
+}
+
+@media (max-width:600px){
+    .historyOrders{
+        height:auto;
+        display: inline-block;
+        margin-left: 15px;
+    }
+    .orderNumberText, .contactInformation, .orderInformation{
+        width: 95%;
+    }
+    .orderNumberText{
+        height:70px;
+    }
+    .orderInformation{
+        height:180px;
+    }
+    .contactInformation{
+        height:150px;
+        margin-left: 10px;
+    }
+}
