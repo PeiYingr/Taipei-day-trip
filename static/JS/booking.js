@@ -17,6 +17,7 @@ const noticeMain= document.querySelector(".noticeMain")
 const cardResult = document.querySelector(".cardResult")
 const expiryResult = document.querySelector(".expiryResult")
 const cvvResult = document.querySelector(".cvvResult")
+const phoneRegex = /^09\d{8}$/;
 let username;
 let useremail;
 let orderInformation;
@@ -194,69 +195,76 @@ TPDirect.card.onUpdate(function (update) {
 // call TPDirect.card.getPrime when user submit form to get tappay prime
 // $('form').on('submit', onSubmit)
 const bookingButton = document.querySelector(".bookingButton")
+const cardNumber = document.querySelector("#card-number input")
+const cardExpiry = document.querySelector("#card-expiration-date input")
+const cardCVV = document.querySelector("#card-ccv input")
 bookingButton.addEventListener("click",function(event) {
     event.preventDefault()
     // 取得 TapPay Fields 的 status
     const tappayStatus = TPDirect.card.getTappayFieldsStatus()
-
     // 確認是否可以 getPrime
     if (tappayStatus.canGetPrime === false) {
+        noticeWindow.style.display="block";
+        noticeMain.innerText = "信用卡資訊未填寫或錯誤"; 
         // alert('can not get prime')
-        return
     }
     // Get prime
     TPDirect.card.getPrime((result) => {
-        if (result.status !== 0) {
-            noticeWindow.style.display="block";
-            noticeMain.innerText="信用卡資訊填寫錯誤"; 
-            // alert('get prime error ' + result.msg)
-            // return
-        }
+        // if (result.status !== 0) {
+        //     alert('get prime error ' + result.msg)
+        // }
         // alert('get prime 成功，prime: ' + result.card.prime)
         // send prime to your server, to pay with Pay by Prime API .
         if(nameInput.value == "" || emailInput.value == ""|| phoneInput.value == ""){
             noticeWindow.style.display="block";
-            noticeMain.innerText="聯絡資訊填寫不完全"; 
+            noticeMain.innerText = "聯絡資訊填寫不完全"; 
         }else{
-            const newOrder ={
-                "prime": result.card.prime,
-                "order": {
-                    "price": orderInformation.price,
-                    "trip": {
-                    "attraction": {
-                    "id": orderInformation.attraction.id,
-                    "name": orderInformation.attraction.name,
-                    "address":  orderInformation.attraction.address,
-                    "image": orderInformation.attraction.image
+            const emailResult = emailInput.value.match(emailRegex);
+            const phoneResult = phoneInput.value.match(phoneRegex);
+            if(emailResult == null || phoneResult == null){
+                noticeWindow.style.display="block";
+                noticeMain.innerText="信箱或手機號碼格式錯誤";
+            }else{
+                const newOrder ={
+                    "prime": result.card.prime,
+                    "order": {
+                        "price": orderInformation.price,
+                        "trip": {
+                        "attraction": {
+                        "id": orderInformation.attraction.id,
+                        "name": orderInformation.attraction.name,
+                        "address":  orderInformation.attraction.address,
+                        "image": orderInformation.attraction.image
+                        },
+                        "date": orderInformation.date,
+                        "time": orderInformation.time
                     },
-                    "date": orderInformation.date,
-                    "time": orderInformation.time
-                },
-                    "contact": {
-                    "name": nameInput.value,
-                    "email": emailInput.value,
-                    "phone": phoneInput.value
+                        "contact": {
+                        "name": nameInput.value,
+                        "email": emailInput.value,
+                        "phone": phoneInput.value
+                        }
                     }
                 }
-            }
-            fetch("/api/order",{
-                method:"POST",
-                body:JSON.stringify(newOrder),
-                cache:"no-cache",
-                headers:new Headers({
-                    "content-type":"application/json"
+                fetch("/api/order",{
+                    method:"POST",
+                    body:JSON.stringify(newOrder),
+                    cache:"no-cache",
+                    headers:new Headers({
+                        "content-type":"application/json"
+                    })
+                }).then(function(response){
+                    return response.json();  
+                }).then(function(data){
+                    if(data.error == true){
+                        noticeWindow.style.display="block";
+                        noticeMain.innerText=data.message; 
+                    }else{
+                        orderNumber = data.data.number;
+                        location.href="/thankyou?number=" + orderNumber;
+                    }        
                 })
-            }).then(function(response){
-                return response.json();  
-            }).then(function(data){
-                if(data.error == true){
-                    noticeWindow.style.display="block";
-                    noticeMain.innerText=data.message; 
-                }else{
-                    orderNumber = data.data.number;
-                    location.href="/thankyou?number=" + orderNumber;
-                }        
-            })
+            }
         }
     })
 })

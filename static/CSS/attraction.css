@@ -19,7 +19,15 @@
     height:100%;
     object-fit: cover;
     border-radius: 5px;
+    /* Fading animation */
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
+/* Fading animation */
+  @keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
 /* Next & previous buttons */
 .prev{
     width: 36px;
@@ -61,7 +69,7 @@
 }
 .dot:hover{
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 0.5;
 }
 .profile{
     flex:none;
@@ -141,8 +149,8 @@
     font-size: 16px;
     line-height: 16px;
     border: none;
+    cursor: pointer;
 }
-
 .time{
     width: 560px;
     height: 22px;
@@ -176,6 +184,7 @@
     border-radius: 50%;
     background:#FFFFFF;
     outline: 4px solid #FFFFFF;
+    cursor: pointer;
 }
 .afternoon{
     width: 87px;
@@ -236,7 +245,6 @@
 .startReserveButton:hover{
     font-weight: bold;
     cursor: pointer;
-    border-radius:5px;
 }
 .hr{
     width: 1200px;

@@ -1,0 +1,241 @@
+.frameColor{
+    border-bottom: 1px solid #E8E8E8;
+}
+.headline{
+    width: 1150px;
+    height: 27px;
+    margin: 40px auto 20px;
+    line-height: 27px;
+    font-weight: 700;
+    font-size: 20px;
+    color: #666666;
+}
+.historyOrderType{
+    width: 1150px;
+    height:50px;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    background-color: #f0f4f4;
+    border-radius:5px 5px 0px 0px;
+    border-bottom: 1px solid #E8E8E8;
+}
+.nopay, .pay, .historyTrip{
+    width: 140px;
+    height: 50px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+}
+.nopay{
+    color: #666666;
+    border-bottom: 2px solid #448899;
+    box-sizing: border-box;
+}
+.pay, .historyTrip{
+    color: #d2d6d6;
+    box-sizing: border-box;       
+}
+.nopay:hover, .pay:hover, .historyTrip:hover{
+    font-weight:700;
+    cursor: pointer;
+    background-color: #e5ecec;
+    color: #757575;
+}
+/* nohistoryOrder, haveHistoryOrder */
+.nohistoryOrderFrame,.havehistoryOrderFrame{
+    width: 1150px;
+    height: 580px;
+    margin: auto;
+    align-items: center;
+    background-color: #f0f4f4;
+    display: none;
+}
+.havehistoryOrderFrame{
+    overflow-y: scroll;
+}
+.nohistoryOrderFrame{
+    border-radius:0px 0px 5px 5px;  
+}
+/* haveHistoryOrder scrollbar style*/
+.havehistoryOrderFrame::-webkit-scrollbar{
+    width: 10px;
+}
+.havehistoryOrderFrame::-webkit-scrollbar-thumb {
+    background-color: white;
+    border: 1px solid slategrey;
+    border-radius: 5px;
+  }
+/* nohistoryOrder */
+.noHistoryOrder{
+    width: 100%;
+    height: auto;
+}
+.noHistoryPicture{
+    width: 250px;
+    height: 200px;
+    margin: 0px auto 20px;
+}
+.noHistoryPicture img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    border-radius: 5px;
+}
+.noHistoryOrderText{
+    width: 100%;
+    height: 90px;
+    line-height: 30px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666666;
+    margin: auto;
+}
+.goTripButton{
+    border:0;
+    width: 150px;
+    height: 38px;
+    background: #448899;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 20px auto 0px;
+}
+.goTripButton:hover{
+    font-weight: bold;
+    cursor: pointer;
+    background:#699fad;
+}
+/* haveHistoryOrder */
+.haveHistoryOrder{
+    width: 100%;
+    height: 100%; 
+}
+.historyOrders{
+    width: 1050px;
+    height: 230px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+}
+.orderNumberText{
+    width: 170px;
+    height:210px;
+    margin:10px 10px 10px 15px;
+    font-size: 18px;
+    height: 24px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #448899
+}
+.historyOrdersPicture{
+    width: 250px;
+    height: 210px;
+    margin:10px 15px 10px 0px;
+}
+.historyOrdersPicture img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    border-radius: 5px;
+}
+.orderInformation,.contactInformation{
+    width: 270px;
+    height: 210px;
+}
+.orderInformation{
+    margin:10px 25px 10px 10px;
+}
+.contactInformation{
+    margin:10px 15px 10px 0px;
+}
+.orderNumber{
+    font-weight: 500;
+    line-height: 50px;
+    color: #000;
+}
+.orderInformationText, .contactInformationText{
+    height: 24px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    color: #448899;
+}
+ul{
+    padding:0; 
+    margin:0;
+    list-style-type: none;
+}
+li{
+    margin: 15px auto;
+    font-weight: bold;    
+}
+.attractionName, .date, .time, .price, .contactName, .contactMail, .contactPhone{
+    font-weight: normal; 
+}
+.fixScroll{
+    width: 1150px;
+    height: 30px;
+    background-color: #f0f4f4;
+    margin: auto;  
+    border-radius:0px 0px 5px 5px;  
+}
+
+@media (max-width:1200px){
+    .headline,.historyOrderType, .nohistoryOrderFrame, .havehistoryOrderFrame, .fixScroll,.historyOrders{
+        width:95%;
+    }
+    .orderNumberText{
+        width:19%;
+    }
+    .historyOrdersPicture{
+        width:25%;
+    }
+    .orderInformation, .contactInformation{
+        width:28%;        
+    }
+    .orderNumberText, .orderInformationText, .contactInformationText{
+        font-size: 16px;
+    }
+}
+
+@media (max-width:810px){
+    .historyOrdersPicture{
+        display:none;
+    }
+    .orderNumberText{
+        width:30%;
+    }
+    .orderInformation, .contactInformation{
+        width:35%;        
+    }
+}
+
+@media (max-width:600px){
+    .historyOrders{
+        height:auto;
+        display: inline-block;
+        margin-left: 15px;
+    }
+    .orderNumberText, .contactInformation, .orderInformation{
+        width: 95%;
+    }
+    .orderNumberText{
+        height:70px;
+    }
+    .orderInformation{
+        height:180px;
+    }
+    .contactInformation{
+        height:150px;
+        margin-left: 10px;
+    }
+}

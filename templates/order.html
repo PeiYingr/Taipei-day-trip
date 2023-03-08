@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+        <title>❉ 台北一日遊-訂單 ❉</title>
+        <link rel="stylesheet" type="text/css" href="/CSS/order.css">
+        {% endblock head %}
+    </head>
+    <body>
+        {% block content %}
+        <div class="headline"></div>
+        <div class="historyOrderType">
+            <div class="nopay">待付款</div>
+            <div class="pay">已付款</div>
+            <div class="historyTrip">歷史行程</div>
+        </div>
+        <div class="nohistoryOrderFrame">
+            <div class="noHistoryOrder">
+                <div class="noHistoryPicture"><img src="/Images/trip.jpeg"></div>
+                <div class="noHistoryOrderText">尚未有訂單
+                    <br/>快去逛逛台北一日遊景點
+                    <br/>踏上一趟美好的旅程！
+                </div>
+                <div class="goTripButton">立即前往</div>
+            </div>
+        </div>
+        <div  class="havehistoryOrderFrame">
+            <div class="haveHistoryOrder"><!--historyOrders--></div>         
+        </div>
+        {% endblock content %} 
+        {% block script %}
+        <script src="/JS/order.js"></script>
+        {% endblock script %} 
+    </body>
+</html>
