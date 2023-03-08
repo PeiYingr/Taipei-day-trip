@@ -45,7 +45,6 @@
 /* nohistoryOrder, haveHistoryOrder */
 .nohistoryOrderFrame,.havehistoryOrderFrame{
     width: 1150px;
-    height: 580px;
     margin: auto;
     align-items: center;
     background-color: #f0f4f4;
@@ -53,9 +52,11 @@
 }
 .havehistoryOrderFrame{
     overflow-y: scroll;
+    height: 580px;
 }
 .nohistoryOrderFrame{
-    border-radius:0px 0px 5px 5px;  
+    border-radius:0px 0px 5px 5px;
+    height: 600px; 
 }
 /* haveHistoryOrder scrollbar style*/
 .havehistoryOrderFrame::-webkit-scrollbar{
