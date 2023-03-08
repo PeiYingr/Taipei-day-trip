@@ -216,7 +216,6 @@ historyTrip.addEventListener("click", function(){
     fetch("/api/order?status=historyTrip").then(function(response){  //method:"GET"
         return response.json();  
     }).then(function(data){
-        console.log(data.data)
         if(data.data == null){
             nohistoryOrderFrame.style.display="flex";
             havehistoryOrderFrame.style.display="none";

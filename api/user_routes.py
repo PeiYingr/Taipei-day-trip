@@ -12,7 +12,6 @@ bcrypt=Bcrypt()
 def signup():
 	try:
 		front_request=request.get_json()
-		()
 		name=front_request["name"]
 		email=front_request["email"]
 		password=front_request["password"]
