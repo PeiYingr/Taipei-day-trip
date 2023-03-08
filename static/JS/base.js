@@ -187,7 +187,6 @@ reserve.addEventListener("click",function(){
 let memberCenterFrameStatus = 0 // status = close
 // click memberCenter(text) : show/hide memberCenterFrame
 const memberCenterFrame = document.querySelector(".memberCenterFrame");
-const memberInfo = document.querySelector(".memberInfo");
 const historyOrder = document.querySelector(".historyOrder");
 memberCenter.addEventListener("click",function(){
     if(memberCenterFrameStatus == 0){
@@ -197,20 +196,6 @@ memberCenter.addEventListener("click",function(){
         memberCenterFrame.style.display = "none";
         memberCenterFrameStatus = 0;     
     }
-})
-
-
-memberInfo.addEventListener("click",function(){
-    fetch("/api/user/auth").then(function(response){    //method:"GET"
-        return response.json();
-    }).then(function(data){
-        if(data.data == null){
-            location.href="/";
-        }
-        else{
-            location.href="/member";
-        }
-    })
 })
 
 historyOrder.addEventListener("click",function(){
