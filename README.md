@@ -23,11 +23,12 @@ This is my first project in the [WeHelp Bootcamp](https://wehelp.tw/). It is bui
 
 * Select and reserve a tour.
 
-![image](demo/demo2.gif) </br>
+![demo2](https://user-images.githubusercontent.com/111441731/224048208-d7ec05bc-8a27-4477-98e9-518f74bd7273.gif)
 
 * Complete your purchase with [TapPay](https://www.tappaysdk.com/) online payment system & track your order history.
 
-![image](demo/demo2.gif)
+![demo3](https://user-images.githubusercontent.com/111441731/224048224-88571e0a-c762-41c4-8661-e5f6e4433c6a.gif)
+
 
 ## Table of Contents 
 - [Main Features](#main-features)
