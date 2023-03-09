@@ -18,12 +18,15 @@ This is my first project in the [WeHelp Bootcamp](https://wehelp.tw/). It is bui
 
 ## Demo
 * Browsing attractions for one-day tours.
+
 ![image](demo/demo1.gif)
 
 * Select and reserve a tour.
+
 ![image](demo/demo2.gif)
 
 * Complete your purchase with [TapPay](https://www.tappaysdk.com/) online payment system & track your order history.
+
 ![image](demo/demo2.gif)
 
 ## Table of Contents 
