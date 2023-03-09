@@ -86,7 +86,7 @@ This is my first project in the [WeHelp Bootcamp](https://wehelp.tw/). It is bui
 [Figma Prototype](https://www.figma.com/file/MZkYBH31H5gyLoZoZq116j)
 
 ## API Doc
-[API Doc]((https://app.swaggerhub.com/apis-docs/padax/taipei-day-trip/1.1.0))
+[API Doc](https://app.swaggerhub.com/apis-docs/padax/taipei-day-trip/1.1.0)
 
 ## Contact
 🍭 盧佩瑩 Pei Ying Lu
